@@ -11,15 +11,23 @@ const Card = (card: CardType): JSX.Element => {
   const backRef = useRef<HTMLDivElement>(null);
 
   const [renderContent, setRenderContent] = useState<JSX.Element>(<></>);
+  const [lastShowFace, setLastShowFace] = useState(showFace);
 
   // To perfect the flip-flop animation
   useEffect(() => {
     const renderShowFace = (front = false, back = false, clearFront = false ) => {
+      const isNeedAnimation = () => {
+        if (!lastShowFace || lastShowFace === showFace) {
+          return false
+        }
+        return true
+      }
+      
       return (<>
-        {<div ref={frontRef} css={cardContainer(back)} key='cardBack'>
+        {<div ref={frontRef} css={cardContainer(back, isNeedAnimation())} key='cardBack'>
           <div css={cardBack}></div>
         </div>}
-        {<div ref={backRef} css={cardContainer(front)} key='cardFront'>
+        {<div ref={backRef} css={cardContainer(front, isNeedAnimation())} key='cardFront'>
           <div css={cardFront}>
             {/* to avoid user seeing in devTools */}
             {!clearFront && <CardFront {...card}/>}
@@ -34,14 +42,16 @@ const Card = (card: CardType): JSX.Element => {
       // render new card showing face after animation finishing
       setTimeout(() => {
         setRenderContent(renderShowFace(false, true, true))
+        setLastShowFace('back')
       }, 500);
     } else {
       setRenderContent(renderShowFace(false, false));
       setTimeout(() => {
         setRenderContent(renderShowFace(true, false, false))
+        setLastShowFace('front')
       }, 500);
     }
-  }, [showFace])
+  }, [card])
 
   return (
     <div css={css`

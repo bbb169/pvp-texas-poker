@@ -30,7 +30,6 @@ const Row = (props: RowProps) => {
     cursor: isDragging ? 'grabbing' : 'grab',
     ...(isDragging ? { position: 'relative', zIndex: 9999 } : {}),
   };
-  console.log(transform, props['data-row-key']);
   
   return <div {...props} ref={setNodeRef} style={style} {...attributes} {...listeners}>{props.children}</div>;
 };
