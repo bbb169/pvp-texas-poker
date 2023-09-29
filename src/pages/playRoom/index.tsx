@@ -3,6 +3,9 @@ import { CardColor, CardType } from "./type.js";
 import { useState } from "react";
 import Card from "@/component/card/index.js";
 import { palyGroundCss, palyRoomPageCss } from "./styles/playRoom.js";
+import { Button } from "antd";
+import { privateKey } from "@/const.js";
+import { AES } from "crypto-js";
 
 export function PlayRoom() {
     const colors: CardColor[] = ['diamonds', 'hearts', 'spades', 'clubs']
@@ -10,7 +13,7 @@ export function PlayRoom() {
     const [holderCards, setHolderCards] = useState<CardType[]>(['diamonds', 'hearts', 'spades', 'clubs'].map((_item, index) => {
         const number = Math.round(Math.random() * 10);
         return {
-            key: colors[index] + number,
+            key: AES.encrypt(colors[index] + number, privateKey).toString(),
             color: colors[index],
             number,
             showFace: 'front',
@@ -28,6 +31,17 @@ export function PlayRoom() {
                     </div>
                 })
             }
+            <Button 
+            key={'button'}
+            type='primary'
+            onClick={() => {
+                setHolderCards(holderCards.map(item => {
+                    return {
+                        ...item,
+                        showFace: item.showFace === 'back' ? 'front' : 'back'
+                    }
+                }))
+            }}>turn face</Button>
         </div>
         <FootHolder cards={holderCards} setCards={setHolderCards} key='footHolder'/>
     </div>

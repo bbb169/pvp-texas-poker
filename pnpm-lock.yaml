@@ -23,6 +23,9 @@ dependencies:
   antd:
     specifier: ^5.9.3
     version: 5.9.3(react-dom@18.2.0)(react@18.2.0)
+  crypto-js:
+    specifier: ^4.1.1
+    version: 4.1.1
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -61,6 +64,9 @@ devDependencies:
   '@testing-library/react':
     specifier: ^14.0.0
     version: 14.0.0(react-dom@18.2.0)(react@18.2.0)
+  '@types/crypto-js':
+    specifier: ^4.1.2
+    version: 4.1.2
   '@types/jest':
     specifier: ^29.5.5
     version: 29.5.5
@@ -2418,6 +2424,10 @@ packages:
       '@babel/types': 7.23.0
     dev: true
 
+  /@types/crypto-js@4.1.2:
+    resolution: {integrity: sha512-t33RNmTu5ufG/sorROIafiCVJMx3jz95bXUMoPAZcUD14fxMXnuTzqzXZoxpR0tNx2xpw11Dlmem9vGCsrSOfA==}
+    dev: true
+
   /@types/estree@1.0.2:
     resolution: {integrity: sha512-VeiPZ9MMwXjO32/Xu7+OwflfmeoRwkE/qzndw42gGtgJwZopBnzy2gD//NN1+go1mADzkDcqf/KnFRSjTJ8xJA==}
     dev: true
@@ -3168,6 +3178,10 @@ packages:
       shebang-command: 2.0.0
       which: 2.0.2
     dev: true
+
+  /crypto-js@4.1.1:
+    resolution: {integrity: sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==}
+    dev: false
 
   /css.escape@1.5.1:
     resolution: {integrity: sha512-YUifsXXuknHlUsmlgyY0PKzgPOr7/FjCePfHNt0jxm83wHZi44VDMQ7/fGNkjY3/jV1MC+1CmZbaHzugyeRtpg==}
