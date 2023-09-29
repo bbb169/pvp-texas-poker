@@ -1,8 +1,7 @@
 import { CardType } from '@/pages/playRoom/type.js';
 import { cardBack, cardContainer, cardFront } from './styles/cardContainer.js';
 import { CardFront } from './cardFront.js';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import * as ReactDOM from 'react-dom';
+import { useEffect, useRef, useState } from 'react';
 import { css } from '@emotion/react';
 
 
@@ -13,6 +12,7 @@ const Card = (card: CardType): JSX.Element => {
 
   const [renderContent, setRenderContent] = useState<JSX.Element>(<></>);
 
+  // To perfect the flip-flop animation
   useEffect(() => {
     const renderShowFace = (front = false, back = false, clearFront = false ) => {
       return (<>
