@@ -64,14 +64,13 @@ export const cardContainer = (show: boolean) => {
     height: 150px;
     border: 2px solid #ccc;
     background-color: #fff;
-    text-align: center;
-    margin: 0 20px;
     border-radius: 10px;
     overflow: hidden;
+    position: absolute;
+    box-sizing: border-box;
     &:hover {
       box-shadow: 0 0 20px 5px rgb(255 247 0 / 72%);
     }
-    display: ${show? 'block;' : 'none;' }
     animation: ${show ? cardFadeIn : cardFadeOut} 0.5s ease-in-out forwards;
   `
 };
