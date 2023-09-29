@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import type { DragEndEvent } from '@dnd-kit/core';
 import { DndContext, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import {
   SortableContext,
   arrayMove,
   useSortable,
-  verticalListSortingStrategy,
   horizontalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -70,7 +69,7 @@ function DragableItem<T extends DataType> ({ dataSource, renderFunc, setDataSour
         strategy={horizontalListSortingStrategy}
       >
         {
-          dataSource.map(item => <Row data-row-key={item.key}>{renderFunc(item)}</Row>)
+          dataSource.map(item => <Row data-row-key={item.key} key={item.key}>{renderFunc(item)}</Row>)
         }
       </SortableContext>
     </DndContext>

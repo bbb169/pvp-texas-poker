@@ -1,8 +1,8 @@
 import { FootHolder } from "./component/footHolder/index.js";
-import { css, jsx } from '@emotion/react';
 import { CardColor, CardType } from "./type.js";
 import { useState } from "react";
 import Card from "@/component/card/index.js";
+import { palyGroundCss, palyRoomPageCss } from "./styles/playRoom.js";
 
 export function PlayRoom() {
     const colors: CardColor[] = ['diamonds', 'hearts', 'spades', 'clubs']
@@ -19,22 +19,8 @@ export function PlayRoom() {
         }
     }));
 
-    return <div css={css`
-        width: 100%;
-        height: 100%;
-        position: relative;
-        background-color: 
-    `}>
-        <div css={css`
-            height: 100%;
-            width: 100%;
-            background: radial-gradient(circle, #07b707 10%, black 90%);
-            padding-bottom: 20%;
-            box-sizing: border-box;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        `} key='playGround'>
+    return <div css={palyRoomPageCss}>
+        <div css={palyGroundCss} key='playGround'>
             {
                 holderCards.map((e) => {
                     return <div key={e.color + e.number}>

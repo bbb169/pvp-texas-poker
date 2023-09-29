@@ -1,6 +1,6 @@
 import Card from '@/component/card/index.js';
 import DragableItem from '@/component/dragableItem/index.js';
-import { css, jsx } from '@emotion/react';
+import { css } from '@emotion/react';
 import { CardType } from '../../type.js';
 
 export function FootHolder({ cards, setCards } : { cards: Array<CardType>, setCards: (datas: (datas: CardType[]) => CardType[]) => void }) {

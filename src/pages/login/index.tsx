@@ -1,6 +1,6 @@
 import { Button, Input } from 'antd';
 import { LoginBox, LoginPage } from './styles/index.js';
-import { css, jsx } from '@emotion/react';
+import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
 
 const marginBottom16 = css`

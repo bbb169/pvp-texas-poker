@@ -1,7 +1,4 @@
-import { CardShowFace } from "@/pages/playRoom/type.js";
 import { css, keyframes } from "@emotion/react";
-import styled from '@emotion/styled';
-import { TransitionStatus } from "react-transition-group";
 
 
 // define CSS key frame animation

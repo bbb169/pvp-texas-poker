@@ -1,33 +1,17 @@
-import React from 'react';
-import { css, jsx } from '@emotion/react';
+import { css } from '@emotion/react';
 import { CardColor, CardType } from '@/pages/playRoom/type.js';
+import { cardBottomRightCornerContentCss, cardBottomRightCornerCss, cardCenterFoutShapeCss, cardTopLeftCornerCss } from './styles/cardFront.js';
 
 
-export const CardFront = ({ color, showFace, number } : CardType): JSX.Element  => {
+export const CardFront = ({ color, number } : CardType): JSX.Element  => {
   return (
     <>
-        <div css={css`
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 25%;
-            width: calc(1/6 * 100%);
-            `}
+        <div css={cardTopLeftCornerCss}
             key='topLeftCorner'>
             <div>{number}</div>
             {getColorShape(color, 1.3)}
         </div>
-        <div css={css`
-            width: calc(2/3 * 100%);
-            height: 70%;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate3d(-50%, -50%,0);
-        `}
+        <div css={cardCenterFoutShapeCss}
         key='centerFoutShape'>
             {
                 [0, 0, 1, 1].map((item, index) => {
@@ -40,21 +24,9 @@ export const CardFront = ({ color, showFace, number } : CardType): JSX.Element  
                 })
             }
         </div>
-        <div css={css`
-            display: flex;
-            justify-content: flex-end;
-            width: 100%;
-            height: 25%;
-        `}
+        <div css={cardBottomRightCornerCss}
         key='bottomRightCorner'>
-            <div css={css`
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: calc(1/6 * 100%);
-                height: 100%;
-                transform: rotate(180deg);
-                `}>
+            <div css={cardBottomRightCornerContentCss}>
                 <div>{number}</div>
                 {getColorShape(color, 1.3)}
             </div>

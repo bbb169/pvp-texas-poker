@@ -1,20 +1,17 @@
-import React from 'react';
-import { css, jsx, keyframes } from '@emotion/react';
 import { CardType } from '@/pages/playRoom/type.js';
-import { cardBack, cardContainer, cardFront } from './css.js';
-import { CSSTransition } from 'react-transition-group';
+import { cardBack, cardContainer, cardFront } from './styles/cardContainer.js';
 import { CardFront } from './cardFront.js';
 
 
 const Card = (card: CardType): JSX.Element => {
-  const { color, showFace, number } = card;
+  const { showFace } = card;
 
   return (
     <>
-      <div css={cardContainer(showFace === 'back')}>
+      <div css={cardContainer(showFace === 'back')} key='cardBack'>
           <div css={cardBack}></div>
       </div>
-      <div css={cardContainer(showFace === 'front')}>
+      <div css={cardContainer(showFace === 'front')} key='cardFront'>
         <div css={cardFront}>
           { showFace === 'front' && <CardFront {...card}/>}
         </div>

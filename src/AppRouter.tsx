@@ -1,5 +1,3 @@
-// AppRouter.js
-import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './pages/login/index.js';
 import { PlayRoom } from './pages/playRoom/index.js';
