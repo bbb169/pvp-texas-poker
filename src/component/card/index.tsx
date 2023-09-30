@@ -15,20 +15,22 @@ const Card = (card: CardType): JSX.Element => {
 
   // To perfect the flip-flop animation
   useEffect(() => {
-    const renderShowFace = (front = false, back = false, clearFront = false ) => {
-      const isNeedAnimation = () => {
-        if (!lastShowFace || lastShowFace === showFace) {
-          return false
-        }
-        return true
+    const getIsNeedAnimation = () => {
+      if (!lastShowFace || lastShowFace === showFace) {
+        return false
       }
-      
+      return true
+    }
+
+    const isNeedAnimation = getIsNeedAnimation();
+
+    const renderShowFace = (front = false, back = false, clearFront = false ) => {
       return (<>
-        {<div ref={frontRef} css={cardContainer(back, isNeedAnimation())} key='cardBack'>
+        {<div ref={frontRef} css={cardContainer(back, isNeedAnimation)} key='cardBack'>
           <div css={cardBack}></div>
         </div>}
-        {<div ref={backRef} css={cardContainer(front, isNeedAnimation())} key='cardFront'>
-          <div css={cardFront}>
+        {<div ref={backRef} css={cardContainer(front, isNeedAnimation)} key='cardFront'>
+          <div css={cardFront(!clearFront)}>
             {/* to avoid user seeing in devTools */}
             {!clearFront && <CardFront {...card}/>}
           </div>
@@ -36,6 +38,19 @@ const Card = (card: CardType): JSX.Element => {
       </>)
     }
 
+    // =============== don't need animation ==============
+    if (!isNeedAnimation) {
+      if (showFace === 'back') {
+        setRenderContent(renderShowFace(false, true, true))
+        setLastShowFace('back')
+      } else {
+        setRenderContent(renderShowFace(true, false, false))
+        setLastShowFace('front')
+      }
+      return;
+    }
+    
+    // =============== need animation ==============
     if (showFace === 'back') {
       // make card fade out
       setRenderContent(renderShowFace(false, false));

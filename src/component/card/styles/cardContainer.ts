@@ -51,17 +51,19 @@ export const cardBack = css`
   text-align: center;
 `
 
-export const cardFront = css`
-  ${cardContentPublic}
-  padding: 4px 2px;
-  position: relative;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-sizing: border-box;
-  user-select: none;
-`
+export const cardFront = (clearFront = false) => {
+  return css`
+    ${cardContentPublic}
+    padding: 4px 2px;
+    position: relative;
+    ${clearFront ? 'background-color: #fff;' : ''}
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    user-select: none;
+  `
+}
 
 export const cardContainer = (show: boolean, animation: boolean) => {
   return css`
