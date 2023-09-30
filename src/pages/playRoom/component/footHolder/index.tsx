@@ -1,3 +1,4 @@
+import { CallChipsPicker } from '@/component/callChipsPicker/index.js';
 import Card from '@/component/card/index.js';
 import DragableItem from '@/component/dragableItem/index.js';
 import { useEffect, useState } from 'react';
@@ -11,8 +12,11 @@ export default function FootHolder({ player } : { player: PlayerInfoType }) {
         setHolderCards(player.holdCards as CardType[])
     }, [player])
 
-    return <div css={footHolderBlueBorderBox(player.status === 'calling')}>
+    const isCalling = player.status === 'calling';
+
+    return <div css={footHolderBlueBorderBox(isCalling)}>
         <div css={footHolderBoxCss}>
+            {isCalling && <CallChipsPicker />}
             {
                 <DragableItem 
                     dataSource={holderCards} 
