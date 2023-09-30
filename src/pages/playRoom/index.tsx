@@ -1,48 +1,48 @@
-import { FootHolder } from "./component/footHolder/index.js";
-import { CardColor, CardType } from "./type.js";
-import { useState } from "react";
+import FootHolder from "./component/footHolder/index.js";
+import { PlayerInfoType } from "./type.js";
+import { useEffect, useState } from "react";
 import Card from "@/component/card/index.js";
-import { palyGroundCss, palyRoomPageCss } from "./styles/playRoom.js";
+import { palyGroundCss, palyRoomPageCss, playGroundTopUsersBoxCss } from "./styles/playRoom.js";
 import { Button } from "antd";
-import { privateKey } from "@/const.js";
-import { AES } from "crypto-js";
+import PlayerBox from "./component/playerBox/index.js";
+import { getOtherPlayersAndMyPlayer } from "./api.js";
 
 export function PlayRoom() {
-    const colors: CardColor[] = ['diamonds', 'hearts', 'spades', 'clubs']
+    const [otherPlayers, setOtherPlayers] = useState<PlayerInfoType[]>([]);
+    const [myPlayer, setMyPlayer] = useState<PlayerInfoType>();
 
-    const [holderCards, setHolderCards] = useState<CardType[]>(['diamonds', 'hearts', 'spades', 'clubs'].map((_item, index) => {
-        const number = Math.round(Math.random() * 10);
-        return {
-            key: AES.encrypt(colors[index] + number, privateKey).toString(),
-            color: colors[index],
-            number,
-            showFace: 'front',
-            holder: 'bbb169',
-            statu: 'distributed'
-        }
-    }));
+    const updatePlayers = () => {
+        getOtherPlayersAndMyPlayer().then(item => {
+            setOtherPlayers(item.otherPlayers)
+            setMyPlayer(item.myPlayer);
+        })
+    }
+
+    useEffect(() => {
+        updatePlayers();
+    }, [])
 
     return <div css={palyRoomPageCss}>
         <div css={palyGroundCss} key='playGround'>
+            <div css={playGroundTopUsersBoxCss}>
+                {
+                    otherPlayers.map(player => <PlayerBox player={player} key={player.position}/>)
+                }
+                <Button 
+                key={'button'}
+                type='primary'
+                onClick={() => {
+                    updatePlayers();
+                }}>next Player</Button>
+            </div>
             {
-                holderCards.map((e) => {
+                myPlayer?.holdCards?.map((e) => {
                     return <div key={e.color + e.number}>
                         <Card {...e} />
                     </div>
                 })
             }
-            <Button 
-            key={'button'}
-            type='primary'
-            onClick={() => {
-                setHolderCards(holderCards.map(item => {
-                    return {
-                        ...item,
-                        showFace: item.showFace === 'back' ? 'front' : 'back'
-                    }
-                }))
-            }}>turn face</Button>
         </div>
-        <FootHolder cards={holderCards} setCards={setHolderCards} key='footHolder'/>
+        { myPlayer && <FootHolder player={myPlayer} key='footHolder'/>}
     </div>
 }

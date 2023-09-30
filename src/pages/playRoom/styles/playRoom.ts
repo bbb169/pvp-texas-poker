@@ -5,7 +5,7 @@ export const palyRoomPageCss = css`
   height: 100%;
   position: relative;
 `
-
+// =================  palyGroundCss ================
 export const palyGroundCss = css`
   height: 100%;
   width: 100%;
@@ -15,4 +15,16 @@ export const palyGroundCss = css`
   display: flex;
   justify-content: center;
   align-items: center;
+`
+
+export const playGroundTopUsersBoxCss = css`
+  width: 100%;
+  height: 20%;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  color: white;
 `

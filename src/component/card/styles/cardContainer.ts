@@ -1,3 +1,4 @@
+import { boxHoverShadow } from "@/styles/animation.js";
 import { css, keyframes } from "@emotion/react";
 
 
@@ -26,9 +27,7 @@ const cardContentPublic = `
   box-sizing: border-box;
   border-radius: 10px;
   overflow: hidden;
-  &:hover {
-    box-shadow: 0 0 20px 5px rgb(255 247 0 / 72%);
-  }
+  ${boxHoverShadow}
 `
 
 export const cardBack = css`

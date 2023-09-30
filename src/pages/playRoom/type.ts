@@ -13,3 +13,9 @@ export interface CardType {
     holder: string;
     statu: 'undistributed' | 'distributed' | 'determineVictory';
 }
+export interface PlayerInfoType {
+    name: string;
+    position: number;
+    status: 'calling' | 'waiting';
+    holdCards?: CardType[];
+}
