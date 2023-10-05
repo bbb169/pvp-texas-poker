@@ -37,7 +37,7 @@ export function PlayRoom() {
             </div>
             {
                 myPlayer?.holdCards?.map((e) => {
-                    return <div key={e.color + e.number}>
+                    return <div key={e.color || '' + e?.number}>
                         <Card {...e} />
                     </div>
                 })

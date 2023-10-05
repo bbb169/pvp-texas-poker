@@ -16,7 +16,7 @@ export default function FootHolder({ player } : { player: PlayerInfoType }) {
 
     return <div css={footHolderBlueBorderBox(isCalling)}>
         <div css={footHolderBoxCss}>
-            {isCalling && <CallChipsPicker />}
+            {isCalling && <CallChipsPicker player={player}/>}
             {
                 <DragableItem 
                     dataSource={holderCards} 

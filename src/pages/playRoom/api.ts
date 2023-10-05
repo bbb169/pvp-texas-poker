@@ -26,6 +26,7 @@ function getAllPlayersInfo(): Promise<PlayerInfoType[]> {
         position: item,
         status: item === currentPlayer ? 'calling' : 'waiting',
         holdCards: item === 4 ? holderCards : undefined,
+        holdCent: 10,
       }
     }))
   })
