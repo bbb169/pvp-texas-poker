@@ -1,11 +1,11 @@
 import FootHolder from "./component/footHolder/index.js";
-import { PlayerInfoType } from "./type.js";
+import { CardType, PlayerInfoType } from "./type.js";
 import { useEffect, useState } from "react";
 import Card from "@/component/card/index.js";
 import { palyGroundCss, palyRoomPageCss, playGroundTopUsersBoxCss } from "./styles/playRoom.js";
 import { Button } from "antd";
 import PlayerBox from "./component/playerBox/index.js";
-import { getOtherPlayersAndMyPlayer } from "./api.js";
+import { getOtherPlayersAndMyPlayer, getPublicCards } from "./api.js";
 
 export function PlayRoom() {
     const [otherPlayers, setOtherPlayers] = useState<PlayerInfoType[]>([]);
@@ -22,6 +22,18 @@ export function PlayRoom() {
         updatePlayers();
     }, [])
 
+    const [publicCard, setPublicCards] = useState<CardType[]>([]);
+
+    const updatePublicCards = () => {
+        getPublicCards().then(res => {
+            setPublicCards([...res]);
+        })
+    }
+
+    useEffect(() => {
+        updatePublicCards();
+    }, [])
+            
     return <div css={palyRoomPageCss}>
         <div css={palyGroundCss} key='playGround'>
             <div css={playGroundTopUsersBoxCss}>
@@ -36,12 +48,16 @@ export function PlayRoom() {
                 }}>next Player</Button>
             </div>
             {
-                myPlayer?.holdCards?.map((e) => {
-                    return <div key={e.color || '' + e?.number}>
-                        <Card {...e} />
-                    </div>
+                publicCard?.map((e) => {
+                    return <Card {...e} />
                 })
             }
+            <Button 
+            key={'button2'}
+            type='primary'
+            onClick={() => {
+                updatePublicCards();
+            }}>next Cards</Button>
         </div>
         { myPlayer && <FootHolder player={myPlayer} key='footHolder'/>}
     </div>

@@ -53,3 +53,45 @@ export async function getOtherPlayersAndMyPlayer(): Promise<{
 export async function getMyPlaer() {
   return myPlayer || (await getOtherPlayersAndMyPlayer()).myPlayer
 }
+
+// ========================= call chips =========================
+
+export function callChips(player: PlayerInfoType, callChips: number) {
+  return new Promise((resolve) => {
+    console.log(player, callChips);
+    
+    resolve('success')
+
+    
+  })
+}
+
+// ======================== get public cards ====================
+
+const publicCards: CardType[] = ['hearts', 'spades', 'clubs', 'diamonds'].map((item, index) => {
+  const number = Math.round(Math.random() * 10) + index;
+  return {
+      key: AES.encrypt(item + number, privateKey).toString(),
+      color: item as CardColor,
+      number,
+      showFace: 'back',
+      statu: 'distributed',
+  }
+})
+
+export function getPublicCards() {
+  let nextCardIndex = publicCards.findIndex(item => item.showFace === 'back');
+
+  const nextCard = publicCards[nextCardIndex]
+
+  if (nextCard) {
+    publicCards[nextCardIndex] = {
+      ...nextCard,
+      showFace: 'front',
+    }
+  }
+
+  return new Promise<CardType[]>((resolve) => {
+    resolve(publicCards);
+  })
+}
