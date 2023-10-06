@@ -60,7 +60,7 @@ const Card = (card: CardType): JSX.Element => {
         setLastShowFace('back')
       }, 500);
     } else {
-      setRenderContent(renderShowFace(false, false));
+      setRenderContent(renderShowFace(false, false, true));
       setTimeout(() => {
         setRenderContent(renderShowFace(true, false, false))
         setLastShowFace('front')
