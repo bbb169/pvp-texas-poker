@@ -6,10 +6,10 @@ import { CardType, PlayerInfoType } from '../../type.js';
 import { footHolderBlueBorderBox, footHolderBoxCss } from './style.js';
 
 export default function FootHolder({ player } : { player: PlayerInfoType }) {
-    const [holderCards, setHolderCards] = useState<CardType[]>(player.holdCards as CardType[]);
+    const [holderCards, setHolderCards] = useState<CardType[] | undefined>(player.holdCards);
 
     useEffect(() => {
-        setHolderCards(player.holdCards as CardType[])
+        setHolderCards(player.holdCards)
     }, [player])
 
     const isCalling = player.status === 'calling';
@@ -18,9 +18,9 @@ export default function FootHolder({ player } : { player: PlayerInfoType }) {
         <div css={footHolderBoxCss}>
             {isCalling && <CallChipsPicker player={player}/>}
             {
-                <DragableItem 
+                holderCards && <DragableItem 
                     dataSource={holderCards} 
-                    setDataSource={setHolderCards} 
+                    setDataSource={setHolderCards as React.Dispatch<React.SetStateAction<CardType[]>>} 
                     renderFunc={(e) => <Card {...e as CardType} />}
                 />
             }

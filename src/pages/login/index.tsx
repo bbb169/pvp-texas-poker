@@ -2,6 +2,7 @@ import { Button, Input } from 'antd';
 import { LoginBox, LoginPage } from './styles/index.js';
 import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const marginBottom16 = css`
   margin: 20px 0;
@@ -10,6 +11,8 @@ const marginBottom16 = css`
 
 const Login = () => {
   const navigate = useNavigate()
+  const [roomId, setRoomId] = useState('');
+  const [userName, setUserRoom] = useState('');
 
   return (
     <LoginPage>
@@ -20,10 +23,14 @@ const Login = () => {
             display: flex;
             flex-direction: column;
           `}>
-            <Input placeholder="输入名称" css={marginBottom16} />
-            <Input placeholder="输入房间号" css={marginBottom16} />
+            <Input value={userName} placeholder="输入名称" css={marginBottom16} onChange={(evt) => {
+              setUserRoom(evt.target.value)
+            }}/>
+            <Input value={roomId} placeholder="输入房间号" css={marginBottom16} onChange={(evt) => {
+              setRoomId(evt.target.value)
+            }}/>
             <Button type="primary" block css={marginBottom16} onClick={() =>{
-              navigate('/playRoom')
+              navigate(`/playRoom/${roomId}/${userName}`)
             }}>
                 Login
             </Button>

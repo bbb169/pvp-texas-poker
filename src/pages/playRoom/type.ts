@@ -20,3 +20,12 @@ export interface PlayerInfoType {
     holdCards?: CardType[];
     holdCent: number;
 }
+
+export interface RoomInfo {
+  cards: CardType[];
+  publicCards?: CardType[];
+  players: PlayerInfoType[];
+  buttonIndex: number;
+  playerMap: Set<string>;
+  statu: 'waiting' | 'started' | 'settling'
+}

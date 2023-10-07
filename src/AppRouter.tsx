@@ -7,7 +7,7 @@ const AppRouter = () => {
     return <Router>
         <Routes>
             <Route path="/" Component={Login} />
-            <Route path="playRoom" Component={PlayRoom} />
+            <Route path="/playRoom/:roomId/:userName" Component={PlayRoom} />
             <Route Component={Login} />
         </Routes>
     </Router>;
