@@ -1,10 +1,17 @@
 import Card from "@/component/card/index.js";
-import { CardType } from "../../type.js";
+import { infoContext } from "@/utils/infoContext.js";
+import { useContext } from "react";
 
-export function PublicCards({ publicCard }: { publicCard: CardType[] }) {
+export function PublicCards() {
+    const { room } = useContext(infoContext);
+
+    if (!room?.publicCards) {
+        return <></>
+    }
+
     return <>
       {
-          publicCard?.map((e) => {
+          room?.publicCards?.map((e) => {
               return <Card {...e} />
           })
       }

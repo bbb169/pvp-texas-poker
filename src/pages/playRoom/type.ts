@@ -14,18 +14,21 @@ export interface CardType {
     statu: 'undistributed' | 'distributed' | 'determineVictory';
 }
 export interface PlayerInfoType {
-    name: string;
-    position: number;
-    status: 'calling' | 'waiting';
-    holdCards?: CardType[];
-    holdCent: number;
+  name: string;
+  position: number;
+  status: 'calling' | 'waiting' | 'fold';
+  holdCards?: CardType[];
+  calledChips: number;
+  holdCent: number;
 }
 
 export interface RoomInfo {
-  cards: CardType[];
+  // front end don't need cards
   publicCards?: CardType[];
   players: PlayerInfoType[];
   buttonIndex: number;
   playerMap: Set<string>;
-  statu: 'waiting' | 'started' | 'settling'
+  statu: 'waiting' | 'started' | 'settling',
+  currentCallChips: number;
+  currentHasChips: number;
 }

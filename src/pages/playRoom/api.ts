@@ -1,5 +1,7 @@
 import { privateKey } from "@/const.js";
+import { emitSocket } from "@/utils/api.js";
 import { AES } from "crypto-js";
+import { useParams } from "react-router-dom";
 import { CardColor, CardType, PlayerInfoType } from "./type.js"
 
 const holderCards: CardType[] = ['hearts', 'spades'].map((item) => {
@@ -16,53 +18,57 @@ const holderCards: CardType[] = ['hearts', 'spades'].map((item) => {
 
 let currentPlayer = 0;
 
-function getAllPlayersInfo(): Promise<PlayerInfoType[]> {
-  currentPlayer = (++currentPlayer)%8 || 8
+// function getAllPlayersInfo(): Promise<PlayerInfoType[]> {
+//   currentPlayer = (++currentPlayer)%8 || 8
 
-  return new Promise((resolve) => {
-    resolve([3,2,1,8,7,6,5,4].map((item) => {
-      return {
-        name: `player-${item}`,
-        position: item,
-        status: item === currentPlayer ? 'calling' : 'waiting',
-        holdCards: item === 4 ? holderCards : undefined,
-        holdCent: 10,
-      }
-    }))
-  })
-}
+//   return new Promise((resolve) => {
+//     resolve([3,2,1,8,7,6,5,4].map((item) => {
+//       return {
+//         name: `player-${item}`,
+//         position: item,
+//         status: item === currentPlayer ? 'calling' : 'waiting',
+//         holdCards: item === 4 ? holderCards : undefined,
+//         holdCent: 10,
+//       }
+//     }))
+//   })
+// }
 
 // ==================== split players ==============
 
 let myPlayer: PlayerInfoType;
 
-export async function getOtherPlayersAndMyPlayer(): Promise<{
-  myPlayer: PlayerInfoType,
-  otherPlayers: PlayerInfoType[],
-}> {
-  const players = await getAllPlayersInfo();
-  const myPlayer = players.pop() as PlayerInfoType;
-  const otherPlayers: PlayerInfoType[] = players;
+// export async function getOtherPlayersAndMyPlayer(): Promise<{
+//   myPlayer: PlayerInfoType,
+//   otherPlayers: PlayerInfoType[],
+// }> {
+//   // const players = await getAllPlayersInfo();
+//   // const myPlayer = players.pop() as PlayerInfoType;
+//   // const otherPlayers: PlayerInfoType[] = players;
 
-  return {
-    myPlayer,
-    otherPlayers,
-  };
-}
+//   // return {
+//   //   myPlayer,
+//   //   otherPlayers,
+//   // };
+// }
 
-export async function getMyPlaer() {
-  return myPlayer || (await getOtherPlayersAndMyPlayer()).myPlayer
-}
+// export async function getMyPlaer() {
+//   return myPlayer || (await getOtherPlayersAndMyPlayer()).myPlayer
+// }
 
 // ========================= call chips =========================
 
-export function callChips(player: PlayerInfoType, callChips: number) {
+export function callChips(roomId: string, userName: string, callChips?: number) {
   return new Promise((resolve) => {
-    console.log(player, callChips);
-    
+    emitSocket(`callChips:${roomId}:${userName}`, callChips)
     resolve('success')
+  })
+}
 
-    
+export function playerFold(roomId: string, userName: string) {
+  return new Promise((resolve) => {
+    emitSocket(`fold:${roomId}:${userName}`)
+    resolve('success')
   })
 }
 
