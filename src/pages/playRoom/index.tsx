@@ -16,6 +16,7 @@ export function PlayRoom() {
     return <infoContext.Provider value={{
         room,
         player,
+        otherPlayers
     }}>
         <div css={palyRoomPageCss}>
             <SettleMoal/>

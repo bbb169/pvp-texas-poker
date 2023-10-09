@@ -4,19 +4,12 @@ import { DollarOutlined } from "@ant-design/icons";
 import { css } from "@emotion/react";
 import { Button, Space } from "antd";
 import { useContext } from "react";
-import { useParams } from "react-router-dom";
 import { SliderChipsPicker } from "./sliderChipsPicker.js";
 
 const basicCallCents = [0,5,10,20];
 
 export function CallChipsPicker() {
   const { player, room } = useContext(infoContext);
-  const { roomId, userName } = useParams();
-  const callChipsDirec = (callingChips?: number) => {
-    if (roomId && userName) {
-      callChips(roomId, userName,callingChips)
-    }
-  }
 
   if (!player || !room) {
     return <></>
@@ -32,16 +25,18 @@ export function CallChipsPicker() {
         basicCallCents.map(item => {
           const isEffectCall = item<=player.holdCent && item + player.calledChips >= room.currentCallChips;
 
-          return isEffectCall && <Button type="primary" shape="round" key={item} onClick={() => callChipsDirec(item)}>
+          return isEffectCall && <Button type="primary" shape="round" key={item} onClick={() => callChips(item)}>
             +{item}
           </Button>
         })
       }
       <SliderChipsPicker player={player}/>
-      <Button type="primary" shape="round" danger onClick={() => callChipsDirec(player.holdCent)}>
+      <Button type="primary" shape="round" danger onClick={() => callChips(player.holdCent)}>
         All in
       </Button>
-      <Button type="primary" shape="round" danger onClick={callChipsDirec}>
+      <Button type="primary" shape="round" danger onClick={() => {
+        callChips()
+      }}>
         Fold
       </Button>
       {/* ================ Chips Account ================ */}

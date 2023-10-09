@@ -5,4 +5,5 @@ import { createContext } from "react";
 export const infoContext = createContext<{
   room?: RoomInfo,
   player?: PlayerInfoType,
+  otherPlayers?: PlayerInfoType[],
 }>({});

@@ -17,13 +17,18 @@ export default function usePlayersCards (): [PlayerInfoType[], PlayerInfoType | 
       socket.on("connect", () => {
         console.log('========== we are connecting ws ===========');
         initSocket(socket);
+        // if repeat username, need use another username
         socket.on('updateUserName', (userName: string) => {
           navigate(`/playRoom/${roomId}/${userName}`);
         })
+
+        // get room infomation
         socket.on(`room`, (room: RoomInfo) => {
           console.log(room);
           setRoom(room)
         })
+
+        // get players infomation
         socket.on(`user`, ({
           myPlayer,
           otherPlayers
@@ -31,12 +36,15 @@ export default function usePlayersCards (): [PlayerInfoType[], PlayerInfoType | 
           myPlayer: PlayerInfoType,
           otherPlayers: PlayerInfoType[]
         }) => {
-          setMyPlayer(myPlayer)
-          setOtherPlayers(otherPlayers);
+          if (myPlayer && otherPlayers) {
+            setMyPlayer(myPlayer)
+            setOtherPlayers(otherPlayers);
+          }
           
           console.log('other:',otherPlayers,'my:',myPlayer);
         })
 
+        // give room and player message to node serve
         emitSocket('connectRoom', {
           roomId,
           userName
