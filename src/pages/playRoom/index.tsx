@@ -1,12 +1,11 @@
-import FootHolder from "./component/footHolder/index.js";import { palyGroundCss, palyRoomPageCss, playGroundTopUsersBoxCss } from "./styles/playRoom.js";
+import FootHolder from "./component/footHolder/index.js";
+import { palyGroundCss, palyRoomPageCss, playGroundTopUsersBoxCss } from "./styles/playRoom.js";
 import PlayerBox from "./component/playerBox/index.js";
 import usePlayersCards from "./hooks/usePlayers.js";
 import { PublicCards } from "./component/publicCards/index.js";
 import WaitingStart from "./component/waitingStart/index.js";
 import { emitSocket } from "@/utils/api.js";
 import { infoContext } from "@/utils/infoContext.js";
-import { DollarOutlined } from "@ant-design/icons";
-import { Button } from "antd";
 import { SettleMoal } from "./component/settleMoal/index.js";
 
 
