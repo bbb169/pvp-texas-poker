@@ -1,7 +1,6 @@
 import { emitSocket, initSocket } from "@/utils/api.js";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Socket } from "socket.io-client";
+import { useNavigate, useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import { PlayerInfoType, RoomInfo } from "../type.js";
 
@@ -10,26 +9,32 @@ export default function usePlayersCards (): [PlayerInfoType[], PlayerInfoType | 
   const [myPlayer, setMyPlayer] = useState<PlayerInfoType>();
   const [room, setRoom] = useState<RoomInfo>();
   const { roomId, userName } = useParams();
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
       const socket = io('http://localhost:4000');
       // client-side
       socket.on("connect", () => {
         console.log('========== we are connecting ws ===========');
         initSocket(socket);
-        socket.on(`room:${roomId}`, (room: RoomInfo) => {
+        socket.on('updateUserName', (userName: string) => {
+          navigate(`/playRoom/${roomId}/${userName}`);
+        })
+        socket.on(`room`, (room: RoomInfo) => {
           console.log(room);
           setRoom(room)
         })
-        socket.on(`user:${roomId}:${userName}`, (players:PlayerInfoType[]) => {
-          console.log(players);
-          
-          const myPlayerIndex = players.findIndex(player => player.name === userName)
-          const myPlayer = players.splice(myPlayerIndex, 1)[0];
+        socket.on(`user`, ({
+          myPlayer,
+          otherPlayers
+        }: {
+          myPlayer: PlayerInfoType,
+          otherPlayers: PlayerInfoType[]
+        }) => {
           setMyPlayer(myPlayer)
-          setOtherPlayers(players);
+          setOtherPlayers(otherPlayers);
           
-          console.log(players,myPlayer);
+          console.log('other:',otherPlayers,'my:',myPlayer);
         })
 
         emitSocket('connectRoom', {
