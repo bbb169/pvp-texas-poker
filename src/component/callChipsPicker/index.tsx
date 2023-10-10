@@ -15,10 +15,10 @@ export function CallChipsPicker() {
     return <></>
   }
 
-  return <div css={css`
+  return <Space css={css`
     position: absolute;
     top: -100px
-  `}>
+  `} direction='vertical'>
     {room && room.statu !== 'waiting' && <Button icon={<DollarOutlined />} type="primary" shape="round">Minimum Callable Chips:{room?.currentCallChips || 0}</Button>}
     <Space>
       {
@@ -43,5 +43,5 @@ export function CallChipsPicker() {
       <Button icon={<DollarOutlined />} type="primary" shape="round">Holding:{player.holdCent}</Button>
       <Button icon={<DollarOutlined />} type="primary" shape="round">Betted: {player.calledChips}</Button>
     </Space>
-  </div>
+  </Space>
 }
