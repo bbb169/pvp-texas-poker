@@ -5,15 +5,14 @@ import { Button, Slider, Tooltip } from "antd";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
-export function SliderChipsPicker({ player } : { player: PlayerInfoType }) {
+export function SliderChipsPicker({ player, minCallableChips } : { player: PlayerInfoType, minCallableChips: number }) {
   const [callingChips, setCallingChips] = useState(0);
   const { roomId, userName } = useParams();
   const callChipsDirec = () => {
     if (roomId && userName) {
-      callChips(roomId, userName,callingChips)
+      callChips(callingChips)
     }
   }
-
 
   return <>
     <Tooltip title={
@@ -26,7 +25,7 @@ export function SliderChipsPicker({ player } : { player: PlayerInfoType }) {
       `}>
         <Slider css={css`
           width: 100px;
-        `} value={callingChips} max={player.holdCent} onChange={(value: number) => setCallingChips(value)}/>
+        `} value={callingChips} min={minCallableChips}  max={player.holdCent} onChange={(value: number) => setCallingChips(value)}/>
         <Button type="primary" shape="round" onClick={() => {         
           callChipsDirec() 
         }} danger={callingChips === player.holdCent}>

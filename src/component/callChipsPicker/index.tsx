@@ -15,6 +15,8 @@ export function CallChipsPicker() {
     return <></>
   }
 
+  const minCallableChips = Math.max(room?.currentCallChips, player.blind, 0);
+
   return <Space css={css`
     position: absolute;
     top: -100px
@@ -22,14 +24,14 @@ export function CallChipsPicker() {
     <Space>
       {
         basicCallCents.map(item => {
-          const isEffectCall = item<=player.holdCent && item + player.calledChips >= room.currentCallChips;
+          const isEffectCall = item<=player.holdCent && item + player.calledChips >= minCallableChips;
 
           return isEffectCall && <Button type="primary" shape="round" key={item} onClick={() => callChips(item)}>
             +{item}
           </Button>
         })
       }
-      <SliderChipsPicker player={player}/>
+      <SliderChipsPicker player={player} minCallableChips={minCallableChips}/>
       <Button type="primary" shape="round" danger onClick={() => callChips(player.holdCent)}>
         All in
       </Button>

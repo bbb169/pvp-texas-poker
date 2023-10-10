@@ -38,9 +38,10 @@ export default function FootHolder() {
                 display: flex;
                 flex-direction: column;
             `}>
+            <Button icon={<DollarOutlined />} type="primary"shape="round">Blind: {player.blind}</Button>
             <Button icon={<DollarOutlined />} type="primary" shape="round">Betted: {player.calledChips}</Button>
-            <Button icon={<DollarOutlined />} type="primary" shape="round">Holding:{player.holdCent}</Button>
-            {room && room.statu !== 'waiting' && <Button icon={<DollarOutlined />} type="primary" shape="round">Minimum Call:{room?.currentCallChips || 0}</Button>}
+            <Button icon={<DollarOutlined />} type="primary" shape="round" danger>Holding:{player.holdCent}</Button>
+            {room && room.statu !== 'waiting' && <Button icon={<DollarOutlined />} type="primary" shape="round">Minimum Call:{Math.max(room?.currentCallChips, player.blind, 0)}</Button>}
             </Space>
         </div>
     </div>
