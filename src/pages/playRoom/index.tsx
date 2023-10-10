@@ -4,7 +4,6 @@ import PlayerBox from "./component/playerBox/index.js";
 import usePlayersCards from "./hooks/usePlayers.js";
 import { PublicCards } from "./component/publicCards/index.js";
 import WaitingStart from "./component/waitingStart/index.js";
-import { emitSocket } from "@/utils/api.js";
 import { infoContext } from "@/utils/infoContext.js";
 import { SettleMoal } from "./component/settleMoal/index.js";
 
@@ -29,13 +28,9 @@ export function PlayRoom() {
                 </div>
                 <PublicCards />
                 {/* starting game or waiting */}
-                {room && room.statu !== 'started' && <WaitingStart {...{
-                    isButtonPosition,
-                    hasOtherPlayers: otherPlayers.length,
-                    onClick: () => {
-                        emitSocket('startGame')
-                    }
-                }}/>}
+                {room && room.statu !== 'started' 
+                && 
+                <WaitingStart isButtonPosition={isButtonPosition} hasOtherPlayers= {otherPlayers.length}/>}
             </div>
             {/* foot place for myPlayer to show its own cards */}
             <FootHolder key='footHolder'/>

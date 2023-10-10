@@ -1,8 +1,16 @@
-import { Button } from "antd";
+import { Button, Space } from "antd";
+import { startGame } from "../../api.js";
 
-export default function WaitingStart({ isButtonPosition, hasOtherPlayers, onClick }: { isButtonPosition: boolean, hasOtherPlayers: number, onClick: () => void }) {
+export default function WaitingStart({ isButtonPosition, hasOtherPlayers }: { isButtonPosition: boolean, hasOtherPlayers: number }) {
     return isButtonPosition && hasOtherPlayers ?
-    <Button type="primary" shape="round" danger onClick={onClick}>Start Game</Button>
+    <Space>
+        <Button type="primary" shape="round" danger onClick={() => {
+            startGame(true)
+        }}>Play short cards</Button>
+        <Button type="primary" shape="round" onClick={() => {
+            startGame()
+        }}>Play long cards</Button>
+    </Space>
     :
     <Button type="primary">Waiting For Starting Game</Button>
 }
