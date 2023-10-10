@@ -19,7 +19,6 @@ export function CallChipsPicker() {
     position: absolute;
     top: -100px
   `} direction='vertical'>
-    {room && room.statu !== 'waiting' && <Button icon={<DollarOutlined />} type="primary" shape="round">Minimum Callable Chips:{room?.currentCallChips || 0}</Button>}
     <Space>
       {
         basicCallCents.map(item => {
@@ -39,9 +38,6 @@ export function CallChipsPicker() {
       }}>
         Fold
       </Button>
-      {/* ================ Chips Account ================ */}
-      <Button icon={<DollarOutlined />} type="primary" shape="round">Holding:{player.holdCent}</Button>
-      <Button icon={<DollarOutlined />} type="primary" shape="round">Betted: {player.calledChips}</Button>
     </Space>
   </Space>
 }

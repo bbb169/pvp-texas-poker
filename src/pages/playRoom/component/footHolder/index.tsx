@@ -2,6 +2,9 @@ import { CallChipsPicker } from '@/component/callChipsPicker/index.js';
 import Card from '@/component/card/index.js';
 import DragableItem from '@/component/dragableItem/index.js';
 import { infoContext } from '@/utils/infoContext.js';
+import { DollarOutlined } from '@ant-design/icons';
+import { css } from '@emotion/react';
+import { Button, Space } from 'antd';
 import { useContext, useEffect, useState } from 'react';
 import { CardType } from '../../type.js';
 import { footHolderBlueBorderBox, footHolderBoxCss } from './style.js';
@@ -30,6 +33,15 @@ export default function FootHolder() {
                     renderFunc={(e) => <Card {...e as CardType} />}
                 />
             }
+            {/* ================ Chips Account ================ */}
+            <Space css={css`
+                display: flex;
+                flex-direction: column;
+            `}>
+            <Button icon={<DollarOutlined />} type="primary" shape="round">Betted: {player.calledChips}</Button>
+            <Button icon={<DollarOutlined />} type="primary" shape="round">Holding:{player.holdCent}</Button>
+            {room && room.statu !== 'waiting' && <Button icon={<DollarOutlined />} type="primary" shape="round">Minimum Call:{room?.currentCallChips || 0}</Button>}
+            </Space>
         </div>
     </div>
 }
