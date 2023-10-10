@@ -23,8 +23,7 @@ export interface PlayerInfoType {
 }
 
 export interface RoomInfo {
-  // front end don't need cards
-  publicCards?: CardType[];
+  publicCards: CardType[];
   players: PlayerInfoType[];
   buttonIndex: number;
   playerMap: Set<string>;

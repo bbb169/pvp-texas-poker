@@ -1,10 +1,12 @@
+import { emitSocket } from "@/utils/api.js";
 import { infoContext } from "@/utils/infoContext.js";
-import { Modal } from "antd";
+import { Button, Modal } from "antd";
 import { useContext, useEffect, useMemo, useState } from "react";
 
 export function SettleMoal() {
     const { room, player, otherPlayers } = useContext(infoContext);
     const [modalOpen, setModalOpen] = useState(true);
+    const isButtonPlayer = room?.buttonIndex === player?.position;
 
     // reset modalOpen
     useEffect(() => {
@@ -28,7 +30,14 @@ export function SettleMoal() {
       }
     }, [room?.statu])
 
-    return <Modal title="Settle" open={room?.statu === 'settling' && modalOpen} onCancel={() => {setModalOpen(false)}} onOk={() => {setModalOpen(false)}}>
+    return <Modal title="Settle" open={room?.statu === 'settling' && modalOpen} onCancel={() => {setModalOpen(false)}} footer={
+      <Button onClick={() => {
+        setModalOpen(false)
+        isButtonPlayer && emitSocket('turnToNextGame')
+      }} type="primary" shape="round">
+        {isButtonPlayer ? 'turn to next game' : 'ok'}
+      </Button>
+    }>
         {renderChildren}
     </Modal>
 }
