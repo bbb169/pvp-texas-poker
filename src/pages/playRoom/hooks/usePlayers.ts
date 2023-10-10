@@ -17,6 +17,14 @@ export default function usePlayersCards (): [PlayerInfoType[], PlayerInfoType | 
       socket.on("connect", () => {
         console.log('========== we are connecting ws ===========');
         initSocket(socket);
+        // give room and player message to node serve
+        socket.on('refuseConnect', (message: string) => {
+          alert(message);
+          socket.removeAllListeners();
+          socket.disconnect();
+          navigate('/');
+        })
+
         // if repeat username, need use another username
         socket.on('updateUserName', (userName: string) => {
           navigate(`/playRoom/${roomId}/${userName}`);

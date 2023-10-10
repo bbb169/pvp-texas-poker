@@ -12,8 +12,8 @@ export default function PlayerBox({ player } : { player: PlayerInfoType }) {
     const size = getPlayerSize()
 
     return <>
-      <div css={UsersBoxFlexCss(player.status === 'fold')} key={player.position}>          
-        <Tooltip title={player.name} placement='bottom'>
+      <div css={UsersBoxFlexCss(player.status === 'fold' || player.status === 'disconnect')} key={player.position}>          
+        <Tooltip title={player.name + ` ${player.status}`} placement='bottom'>
           <Avatar src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=${player.position}`} size={size} css={css`
             ${boxHoverShadow}
           `}/>
