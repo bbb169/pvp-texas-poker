@@ -1,4 +1,4 @@
-import { css, keyframes } from "@emotion/react";
+import { css, keyframes } from '@emotion/react';
 
 const breatheBlueBorder = keyframes`
   0% {
@@ -17,7 +17,7 @@ const breatheBlueBorder = keyframes`
 
 export const myPlayerCallingAnimation = css`
   animation: ${breatheBlueBorder} 4s ease-in-out infinite;
-`
+`;
 
 
 const breatheBackGrount = keyframes`
@@ -38,7 +38,7 @@ export const footHolderBlueBorderBox = (isCalling = false) => css`
   width: 100%;
   height: 20%;
   ${isCalling ? myPlayerCallingAnimation : ''} 
-`
+`;
 
 export const footHolderBoxCss = css`
   width: 100%;
@@ -55,4 +55,4 @@ export const footHolderBoxCss = css`
     background: linear-gradient(to bottom right, #00ccff, #ff0000);
     animation: ${breatheBackGrount} 8s linear infinite;
   }
-`
+`;

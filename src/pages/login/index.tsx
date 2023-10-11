@@ -10,34 +10,34 @@ const marginBottom16 = css`
 `;
 
 const Login = () => {
-  const navigate = useNavigate()
-  const [roomId, setRoomId] = useState('');
-  const [userName, setUserRoom] = useState('');
+    const navigate = useNavigate();
+    const [roomId, setRoomId] = useState('');
+    const [userName, setUserRoom] = useState('');
 
-  return (
-    <LoginPage>
-      <LoginBox>
-        <h2>进入房间</h2>
-        <div css={css`
+    return (
+        <LoginPage>
+            <LoginBox>
+                <h2>进入房间</h2>
+                <div css={css`
             flex: 1;
             display: flex;
             flex-direction: column;
           `}>
-            <Input value={userName} placeholder="输入名称" css={marginBottom16} onChange={(evt) => {
-              setUserRoom(evt.target.value)
-            }}/>
-            <Input value={roomId} placeholder="输入房间号" css={marginBottom16} onChange={(evt) => {
-              setRoomId(evt.target.value)
-            }}/>
-            <Button type="primary" block css={marginBottom16} onClick={() =>{
-              navigate(`/playRoom/${roomId}/${userName}`)
-            }}>
+                    <Input value={userName} placeholder="输入名称" css={marginBottom16} onChange={(evt) => {
+                        setUserRoom(evt.target.value);
+                    }}/>
+                    <Input value={roomId} placeholder="输入房间号" css={marginBottom16} onChange={(evt) => {
+                        setRoomId(evt.target.value);
+                    }}/>
+                    <Button type="primary" block css={marginBottom16} onClick={() => {
+                        navigate(`/playRoom/${roomId}/${userName}`);
+                    }}>
                 Login
-            </Button>
-        </div>
-      </LoginBox>
-    </LoginPage>
-  );
+                    </Button>
+                </div>
+            </LoginBox>
+        </LoginPage>
+    );
 };
 
 export default Login;

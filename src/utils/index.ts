@@ -1,3 +1,3 @@
-export function NOOP(): void {
+export function NOOP (): void {
   
 }

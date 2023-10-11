@@ -9,16 +9,16 @@ import { useContext, useEffect, useState } from 'react';
 import { CardType } from '../../type.js';
 import { footHolderBlueBorderBox, footHolderBoxCss } from './style.js';
 
-export default function FootHolder() {
+export default function FootHolder () {
     const { player, room } = useContext(infoContext);
     const [holderCards, setHolderCards] = useState<CardType[] | undefined>(player?.holdCards);
 
     useEffect(() => {
-        setHolderCards(player?.holdCards)
-    }, [player])
+        setHolderCards(player?.holdCards);
+    }, [player]);
 
     if (!player || !room) {
-        return <></>
+        return <></>;
     }
 
     const isCalling = player.status === 'calling';
@@ -38,11 +38,11 @@ export default function FootHolder() {
                 display: flex;
                 flex-direction: column;
             `}>
-            <Button icon={<DollarOutlined />} type="primary"shape="round">Blind: {player.blind}</Button>
-            <Button icon={<DollarOutlined />} type="primary" shape="round">Betted: {player.calledChips}</Button>
-            <Button icon={<DollarOutlined />} type="primary" shape="round" danger>Holding:{player.holdCent}</Button>
-            {room && room.statu !== 'waiting' && <Button icon={<DollarOutlined />} type="primary" shape="round">Minimum Call:{Math.max(room?.currentCallChips, player.blind, 0)}</Button>}
+                <Button icon={<DollarOutlined />} type="primary"shape="round">Blind: {player.blind}</Button>
+                <Button icon={<DollarOutlined />} type="primary" shape="round">Betted: {player.calledChips}</Button>
+                <Button icon={<DollarOutlined />} type="primary" shape="round" danger>Holding:{player.holdCent}</Button>
+                {room && room.statu !== 'waiting' && <Button icon={<DollarOutlined />} type="primary" shape="round">Minimum Call:{Math.max(room?.currentCallChips, player.blind, 0)}</Button>}
             </Space>
         </div>
-    </div>
+    </div>;
 }

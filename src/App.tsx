@@ -1,12 +1,12 @@
-import './App.css'
-import AppRouter from './AppRouter.js'
+import './App.css';
+import AppRouter from './AppRouter.js';
 
-function App() {
-  return (
-    <>
-      <AppRouter/>
-    </>
-  )
+function App () {
+    return (
+        <>
+            <AppRouter/>
+        </>
+    );
 }
 
-export default App
+export default App;

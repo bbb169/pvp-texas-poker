@@ -1,10 +1,10 @@
-import { css } from "@emotion/react";
+import { css } from '@emotion/react';
 
 export const palyRoomPageCss = css`
   width: 100%;
   height: 100%;
   position: relative;
-`
+`;
 // =================  palyGroundCss ================
 export const palyGroundCss = css`
   height: 100%;
@@ -15,7 +15,7 @@ export const palyGroundCss = css`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 export const playGroundTopUsersBoxCss = css`
   width: 100%;
@@ -27,4 +27,4 @@ export const playGroundTopUsersBoxCss = css`
   position: absolute;
   top: 0;
   color: white;
-`
+`;

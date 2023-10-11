@@ -25,7 +25,7 @@ module.exports = {
         ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
     },
-    plugins: ['react-refresh', '@typescript-eslint'],
+    plugins: ['react-refresh', '@typescript-eslint', 'eslint-plugin-import', 'eslint-plugin-react', 'react'],
     rules: {
         'no-cond-assign': 'error',
         '@typescript-eslint/no-use-before-define':'off',
@@ -49,6 +49,7 @@ module.exports = {
         'template-curly-spacing': [1],
         // 字符串内禁止出现非法转义字符
         'no-useless-escape': ['error'],
+        
         // 推荐使用function foo(){} 不推荐使用constfoo=function(){}
         'func-style': [1, 'declaration', { allowArrowFunctions: true }],
         // 立即执行表达式必须用圆括号包裹
@@ -69,8 +70,6 @@ module.exports = {
         'no-confusing-arrow': ['error'],
         // 禁止在同一个对象中出现相同的key
         'no-dupe-class-members': ['error'],
-        //
-        'import/extensions': ['error'],
         // 禁止使用foreach for of 应该使用[].foreach代替
         'no-iterator': ['error'],
         // 禁止用obj['key'] 必须使用obj.key
@@ -118,38 +117,6 @@ module.exports = {
         'import/prefer-default-export': ['off'],
         'no-console': ['error', { allow: ['warn', 'error'] }],
         'max-statements': ['error', 100],
-        'require-jsdoc-except/require-jsdoc': [
-            'error', {
-                require: {
-                    FunctionDeclaration: true,
-                    MethodDefinition: true,
-                },
-                ignore: [
-                    'constructor',
-                    'componentWillMount',
-                    'componentDidMount',
-                    'componentWillReceiveProps',
-                    'shouldComponentUpdate',
-                    'componentWillUpdate',
-                    'componentWillUnmount',
-                    'componentWillPreload',
-                    'componentDidShow',
-                    'componentDidHide',
-                    'componentDidCatchError',
-                    'componentDidNotFound',
-                    'onPullDownRefresh',
-                    'onReachBottom',
-                    'onPageScroll',
-                    'onShareAppMessage',
-                    'onTabItemTap',
-                    'onResize',
-                    '/.+Reducer/',
-                    '/render.*/',
-                    'injected',
-                    'UNSAFE_componentWillReceiveProps',
-                ],
-            },
-        ],
         // 要求或禁止使用分号而不是 ASI（这个才是控制尾部分号的，）
         semi: [2, 'always'],
         // 强制分号之前和之后使用一致的空格
@@ -208,6 +175,7 @@ module.exports = {
                 functions: 'ignore',
             },
         ],
-        'linebreak-style': ['error', 'unix'],
+        'react/react-in-jsx-scope': 0,
+        'react/no-unknown-property': 0,
     },
 };

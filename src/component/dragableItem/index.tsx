@@ -1,12 +1,10 @@
 import React from 'react';
 import type { DragEndEvent } from '@dnd-kit/core';
 import { DndContext, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
-import {
-  SortableContext,
-  arrayMove,
-  useSortable,
-  horizontalListSortingStrategy,
-} from '@dnd-kit/sortable';
+import { SortableContext,
+    arrayMove,
+    useSortable,
+    horizontalListSortingStrategy, } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { restrictToParentElement } from '@dnd-kit/modifiers';
 
@@ -19,19 +17,18 @@ interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {
 }
 
 const Row = (props: RowProps) => {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
-    id: props['data-row-key'],
-  });
+    const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: props['data-row-key'] });
   
-  const style: React.CSSProperties = {
-    ...props.style,
-    transform: CSS.Transform.toString(transform && { ...transform, scaleY: 1 }),
-    transition,
-    cursor: isDragging ? 'grabbing' : 'grab',
-    ...(isDragging ? { position: 'relative', zIndex: 9999 } : {}),
-  };
+    const style: React.CSSProperties = {
+        ...props.style,
+        transform: CSS.Transform.toString(transform && { ...transform, scaleY: 1 }),
+        transition,
+        cursor: isDragging ? 'grabbing' : 'grab',
+        ...(isDragging ? { position: 'relative', zIndex: 9999 } : {}),
+    };
   
-  return <div {...props} ref={setNodeRef} style={style} {...attributes} {...listeners}>{props.children}</div>;
+    return <div {...props} ref={setNodeRef} style={style} {...attributes}
+        {...listeners}>{props.children}</div>;
 };
 
 function DragableItem<T extends DataType> ({ dataSource, renderFunc, setDataSource } : { 
@@ -39,40 +36,34 @@ function DragableItem<T extends DataType> ({ dataSource, renderFunc, setDataSour
   renderFunc: (data: T) => JSX.Element, 
   setDataSource: (datas: (datas: T[]) => T[]) => void 
 }) {
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 1,
-      },
-    }),
-  );
+    const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 1 } }),);
 
-  const onDragEnd = ({ active, over }: DragEndEvent) => {
-    if (active.id !== over?.id) {
-      setDataSource((prev: T[]) => {
-        const activeIndex = prev.findIndex((i) => i.key === active.id);
-        const overIndex = prev.findIndex((i) => i.key === over?.id);
-        return arrayMove(prev, activeIndex, overIndex);
-      });
-    }
-  };
-
-  return (
-    <DndContext 
-      sensors={sensors}
-      modifiers={[restrictToParentElement]}
-      onDragEnd={onDragEnd}>
-      <SortableContext
-        // rowKey array
-        items={dataSource.map((i) => i.key)}
-        strategy={horizontalListSortingStrategy}
-      >
-        {
-          dataSource.map(item => <Row data-row-key={item.key} key={item.key}>{renderFunc(item)}</Row>)
+    const onDragEnd = ({ active, over }: DragEndEvent) => {
+        if (active.id !== over?.id) {
+            setDataSource((prev: T[]) => {
+                const activeIndex = prev.findIndex((i) => i.key === active.id);
+                const overIndex = prev.findIndex((i) => i.key === over?.id);
+                return arrayMove(prev, activeIndex, overIndex);
+            });
         }
-      </SortableContext>
-    </DndContext>
-  );
-};
+    };
+
+    return (
+        <DndContext 
+            sensors={sensors}
+            modifiers={[restrictToParentElement]}
+            onDragEnd={onDragEnd}>
+            <SortableContext
+                // rowKey array
+                items={dataSource.map((i) => i.key)}
+                strategy={horizontalListSortingStrategy}
+            >
+                {
+                    dataSource.map(item => <Row data-row-key={item.key} key={item.key}>{renderFunc(item)}</Row>)
+                }
+            </SortableContext>
+        </DndContext>
+    );
+}
 
 export default DragableItem;

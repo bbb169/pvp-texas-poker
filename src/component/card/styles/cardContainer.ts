@@ -1,5 +1,5 @@
-import { boxHoverShadow } from "@/styles/animation.js";
-import { css, keyframes } from "@emotion/react";
+import { boxHoverShadow } from '@/styles/animation.js';
+import { css, keyframes } from '@emotion/react';
 
 
 // define CSS key frame animation
@@ -28,7 +28,7 @@ const cardContentPublic = `
   border-radius: 10px;
   overflow: hidden;
   ${boxHoverShadow}
-`
+`;
 
 export const cardBack = css`
   ${cardContentPublic}
@@ -48,10 +48,10 @@ export const cardBack = css`
   font-size: 18px;
   font-weight: bold;
   text-align: center;
-`
+`;
 
 export const cardFront = (clearFront = false) => {
-  return css`
+    return css`
     ${cardContentPublic}
     padding: 4px 2px;
     position: relative;
@@ -61,15 +61,15 @@ export const cardFront = (clearFront = false) => {
     justify-content: space-between;
     box-sizing: border-box;
     user-select: none;
-  `
-}
+  `;
+};
 
 export const cardContainer = (show: boolean, animation: boolean) => {
-  return css`
+    return css`
     width: 100px;
     height: 150px;
     position: absolute;
     box-sizing: border-box;
     ${animation ? css`animation: ${show ? cardFadeIn : cardFadeOut} 0.5s ease-in-out forwards;` : ''}
-  `
+  `;
 };

@@ -34,3 +34,8 @@ export interface RoomInfo {
   smallBlind: number;
   bigBlind: number;
 }
+
+export interface VictoryInfo {
+  getChips: number,
+  cardName: string
+}
