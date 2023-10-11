@@ -1,6 +1,5 @@
 import { callChips } from "@/pages/playRoom/api.js";
 import { infoContext } from "@/utils/infoContext.js";
-import { DollarOutlined } from "@ant-design/icons";
 import { css } from "@emotion/react";
 import { Button, Space } from "antd";
 import { useContext } from "react";
