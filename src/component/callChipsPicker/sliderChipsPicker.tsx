@@ -23,9 +23,9 @@ export function SliderChipsPicker({ player, minCallableChips } : { player: Playe
         align-items: center;
         padding: 8px 4px;
       `}>
-        <Slider css={css`
+        add <Slider css={css`
           width: 100px;
-        `} value={callingChips} min={minCallableChips}  max={player.holdCent} onChange={(value: number) => setCallingChips(value)}/>
+        `} value={callingChips} min={minCallableChips - player.calledChips}  max={player.holdCent} onChange={(value: number) => setCallingChips(value)}/>
         <Button type="primary" shape="round" onClick={() => {         
           callChipsDirec() 
         }} danger={callingChips === player.holdCent}>
