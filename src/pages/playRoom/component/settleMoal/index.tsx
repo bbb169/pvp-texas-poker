@@ -4,7 +4,7 @@ import { Button, Modal } from "antd";
 import { useContext, useEffect, useMemo, useState } from "react";
 
 export function SettleMoal() {
-    const { room, player, otherPlayers } = useContext(infoContext);
+    const { room, player, otherPlayers, victoryPlayers } = useContext(infoContext);
     const [modalOpen, setModalOpen] = useState(true);
     const isButtonPlayer = room?.buttonIndex === player?.position;
 
@@ -17,13 +17,11 @@ export function SettleMoal() {
 
     const renderChildren = useMemo(() => {
       if (room?.statu === 'settling' && player && otherPlayers) {
-        const allPlayers = [player, ...otherPlayers]
-
-        let victoryPlayers = allPlayers.filter(playerItem => playerItem.status !== 'fold').map(playerItem => playerItem.name)
-        
         return <div>
-          <h3>victory player: {victoryPlayers.join(',')}</h3>
-          <h3>get chips: {room.currentHasChips}</h3>
+          <h2>Victory players</h2>
+          {
+            victoryPlayers?.map(([player, getChips]) => <h3>{player.name}: get chips {getChips}</h3>)
+          }
         </div>
       } else {
         return <></>

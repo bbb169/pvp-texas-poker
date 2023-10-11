@@ -6,4 +6,5 @@ export const infoContext = createContext<{
   room?: RoomInfo,
   player?: PlayerInfoType,
   otherPlayers?: PlayerInfoType[],
+  victoryPlayers?: [PlayerInfoType, number][]
 }>({});

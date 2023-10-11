@@ -9,13 +9,14 @@ import { SettleMoal } from "./component/settleMoal/index.js";
 
 
 export function PlayRoom() {
-    const [otherPlayers, player, room] = usePlayersCards();
+    const [otherPlayers, player, room, victoryPlayers] = usePlayersCards();
     const  isButtonPosition = Boolean(room && player && room.buttonIndex === player.position)
     
     return <infoContext.Provider value={{
         room,
         player,
-        otherPlayers
+        otherPlayers,
+        victoryPlayers
     }}>
         <div css={palyRoomPageCss}>
             <SettleMoal/>

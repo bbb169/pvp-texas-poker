@@ -4,9 +4,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import { PlayerInfoType, RoomInfo } from "../type.js";
 
-export default function usePlayersCards (): [PlayerInfoType[], PlayerInfoType | undefined, RoomInfo | undefined] {
+export default function usePlayersCards (): [PlayerInfoType[], PlayerInfoType | undefined, RoomInfo | undefined, [PlayerInfoType, number][]] {
   const [otherPlayers, setOtherPlayers] = useState<PlayerInfoType[]>([]);
   const [myPlayer, setMyPlayer] = useState<PlayerInfoType>();
+  const [victoryPlayers, setVictoryPlayers] = useState<[PlayerInfoType, number][]>([]);
   const [room, setRoom] = useState<RoomInfo>();
   const { roomId, userName } = useParams();
   const navigate = useNavigate();
@@ -52,6 +53,10 @@ export default function usePlayersCards (): [PlayerInfoType[], PlayerInfoType | 
           console.log('other:',otherPlayers,'my:',myPlayer);
         })
 
+        socket.on('victoryPlayers', (victoryPlayers: [PlayerInfoType, number][]) => {
+          setVictoryPlayers(victoryPlayers);
+        })
+
         // give room and player message to node serve
         emitSocket('connectRoom', {
           roomId,
@@ -68,5 +73,5 @@ export default function usePlayersCards (): [PlayerInfoType[], PlayerInfoType | 
       };
   }, [])
 
-  return [otherPlayers, myPlayer, room]
+  return [otherPlayers, myPlayer, room, victoryPlayers]
 }
