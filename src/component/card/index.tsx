@@ -71,10 +71,10 @@ const Card = (card: CardType): React.JSX.Element => {
 
     return (
         <div css={css`
-      position: relative;
-      width: 100px;
-      height: 150px;
-    `}>
+            position: relative;
+            width: 100px;
+            height: 150px;
+        `}>
             {renderContent}
         </div>
     );

@@ -20,7 +20,10 @@ export function CallChipsPicker () {
     position: absolute;
     top: -100px
   `} direction='vertical'>
-        <Space>
+        <Space css={css`
+            flex-wrap: wrap;
+            justify-content: center;
+        `}>
             {
                 basicCallCents.map(item => {
                     const isEffectCall = item <= player.holdCent && item + player.calledChips >= minCallableChips;
