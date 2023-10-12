@@ -2,7 +2,7 @@ import Card from '@/component/card/index.js';
 import { emitSocket } from '@/utils/api.js';
 import { infoContext } from '@/utils/infoContext.js';
 import { css } from '@emotion/react';
-import { Button, Modal } from 'antd';
+import { Button, Modal, Tooltip } from 'antd';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
 export function SettleMoal () {
@@ -23,15 +23,21 @@ export function SettleMoal () {
                 <h2>Victory players</h2>
                 {
                     victoryPlayers?.map(([player, victoryInfo]) => <div key={player.name}>
-                        <h3>{player.name}: get chips {victoryInfo.getChips}, card type: {victoryInfo.cardName}</h3>
-                        <div css={css`
-                            display: flex;
-                            align-items: center;
-                            background-color: rgb(240,240,240);
-                            padding: 8px 0px;
-                        `}>
-                            {victoryInfo.cards && victoryInfo.cards.map(card => <Card {...card} key={card.key}/>)}
-                        </div>
+                        <Tooltip css={css`
+                            max-width: none;
+                        `}  title={
+                            <div css={css`
+                                display: flex;
+                                align-items: center;
+                                padding: 8px 0px;
+                                padding-right: 10vw;
+                                width: 80vw;
+                            `}>
+                                {victoryInfo.cards && victoryInfo.cards.map(card => <Card {...card} key={card.key}/>)}
+                            </div>
+                        } placement='bottom' trigger={'click'}>
+                            <Button type="primary" shape="round">{player.name}: get chips {victoryInfo.getChips}, card type: {victoryInfo.cardName}</Button>
+                        </Tooltip>
                     </div>)
                 }
             </div>;
