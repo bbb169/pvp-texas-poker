@@ -6,7 +6,7 @@ import { UsersBoxFlexCss } from './style.js';
 
 export default function PlayerBox ({ player } : { player: PlayerInfoType }) {
     const getPlayerSize = () => {
-        return player.status === 'calling' ? 64 : 32;
+        return player.status.includes('calling') ? 64 : 32;
     };
 
     const size = getPlayerSize();
@@ -18,7 +18,7 @@ export default function PlayerBox ({ player } : { player: PlayerInfoType }) {
     </div>;
 
     return <>
-        <div css={UsersBoxFlexCss(player.status === 'fold' || player.status === 'disconnect')} key={player.position}>          
+        <div css={UsersBoxFlexCss(player.status.includes('fold') || player.status.includes('disconnect'))} key={player.position}>          
             <Tooltip title={playerInfo} placement='bottom'>
                 <Avatar src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=${player.position}`} size={size} css={css`
             ${boxHoverShadow}

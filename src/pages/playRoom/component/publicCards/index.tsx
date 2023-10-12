@@ -12,7 +12,7 @@ export function PublicCards () {
     return <>
         {
             room?.publicCards?.map((e) => {
-                return <Card {...e} />;
+                return <Card {...e} key={e.key}/>;
             })
         }
     </>;

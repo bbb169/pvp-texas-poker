@@ -13,10 +13,12 @@ export interface CardType {
     holder?: string;
     statu: 'undistributed' | 'distributed' | 'determineVictory';
 }
+
+export type PlayerInfoStatusType = 'disconnect' | 'calling' | 'waiting' | 'fold';
 export interface PlayerInfoType {
   name: string;
   position: number;
-  status: 'disconnect' | 'calling' | 'waiting' | 'fold';
+  status: PlayerInfoStatusType[];
   holdCards: CardType[];
   calledChips: number;
   holdCent: number;

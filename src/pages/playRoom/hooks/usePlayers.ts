@@ -42,9 +42,9 @@ export default function usePlayersCards (): [PlayerInfoType[], PlayerInfoType | 
                 myPlayer,
                 otherPlayers,
             }: {
-          myPlayer: PlayerInfoType,
-          otherPlayers: PlayerInfoType[]
-        }) => {
+              myPlayer: PlayerInfoType,
+              otherPlayers: PlayerInfoType[]
+            }) => {
                 if (myPlayer && otherPlayers) {
                     setMyPlayer(myPlayer);
                     setOtherPlayers(otherPlayers);
@@ -54,6 +54,8 @@ export default function usePlayersCards (): [PlayerInfoType[], PlayerInfoType | 
             });
 
             socket.on('victoryPlayers', (victoryPlayers: [PlayerInfoType, number][]) => {
+                console.log('victoryPlayers', victoryPlayers);
+              
                 setVictoryPlayers(victoryPlayers);
             });
 

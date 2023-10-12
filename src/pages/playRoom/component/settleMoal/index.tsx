@@ -20,7 +20,7 @@ export function SettleMoal () {
             return <div>
                 <h2>Victory players</h2>
                 {
-                    victoryPlayers?.map(([player, getChips]) => <h3>{player.name}: get chips {getChips}</h3>)
+                    victoryPlayers?.map(([player, getChips]) => <h3 key={player.name}>{player.name}: get chips {getChips}</h3>)
                 }
             </div>;
         } 
