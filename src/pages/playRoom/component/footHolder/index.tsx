@@ -27,17 +27,24 @@ export default function FootHolder () {
     return <div css={footHolderBlueBorderBox(isCalling)}>
         <div css={footHolderBoxCss}>
             {isCalling && <CallChipsPicker />}
-            {
-                holderCards && <DragableItem 
-                    dataSource={holderCards} 
-                    setDataSource={setHolderCards as React.Dispatch<React.SetStateAction<CardType[]>>} 
-                    renderFunc={(e) => <Card {...e as CardType} />}
-                />
-            }
+            <div css={css`
+                display: flex;
+                justify-content: space-evenly;
+                flex: 3;
+            `}>
+                {
+                    holderCards && <DragableItem 
+                        dataSource={holderCards} 
+                        setDataSource={setHolderCards as React.Dispatch<React.SetStateAction<CardType[]>>} 
+                        renderFunc={(e) => <Card {...e as CardType} />}
+                    />
+                }
+            </div>
             {/* ================ Chips Account ================ */}
             <Space css={css`
                 display: flex;
                 flex-direction: column;
+                flex: 2;
             `}>
                 <Button icon={<DollarOutlined />} type="primary"shape="round">Blind: {player.blind}</Button>
                 <Button icon={<DollarOutlined />} type="primary" shape="round">Betted: {player.calledChips}</Button>

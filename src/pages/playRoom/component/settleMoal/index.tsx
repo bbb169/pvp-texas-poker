@@ -1,5 +1,7 @@
+import Card from '@/component/card/index.js';
 import { emitSocket } from '@/utils/api.js';
 import { infoContext } from '@/utils/infoContext.js';
+import { css } from '@emotion/react';
 import { Button, Modal } from 'antd';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
@@ -20,7 +22,17 @@ export function SettleMoal () {
             return <div>
                 <h2>Victory players</h2>
                 {
-                    victoryPlayers?.map(([player, victoryInfo]) => <h3 key={player.name}>{player.name}: get chips {victoryInfo.getChips}, card type: {victoryInfo.cardName}</h3>)
+                    victoryPlayers?.map(([player, victoryInfo]) => <div key={player.name}>
+                        <h3>{player.name}: get chips {victoryInfo.getChips}, card type: {victoryInfo.cardName}</h3>
+                        <div css={css`
+                            display: flex;
+                            align-items: center;
+                            background-color: rgb(240,240,240);
+                            padding: 8px 0px;
+                        `}>
+                            {victoryInfo.cards && victoryInfo.cards.map(card => <Card {...card} key={card.key}/>)}
+                        </div>
+                    </div>)
                 }
             </div>;
         } 

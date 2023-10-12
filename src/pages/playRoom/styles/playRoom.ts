@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 
 export const palyRoomPageCss = css`
   width: 100%;
@@ -13,6 +14,7 @@ export const palyGroundCss = css`
   padding-bottom: 20%;
   box-sizing: border-box;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
@@ -27,4 +29,13 @@ export const playGroundTopUsersBoxCss = css`
   position: absolute;
   top: 0;
   color: white;
+`;
+
+export const CardsFlexBoxDiv = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 80%;
+  margin-left: -10%;
+  margin-bottom: 20px;
 `;

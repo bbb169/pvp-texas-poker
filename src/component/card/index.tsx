@@ -74,7 +74,6 @@ const Card = (card: CardType): React.JSX.Element => {
       position: relative;
       width: 100px;
       height: 150px;
-      margin: 0 20px;
     `}>
             {renderContent}
         </div>
