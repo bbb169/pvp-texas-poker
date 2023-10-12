@@ -2,12 +2,12 @@ import { emitSocket, initSocket } from '@/utils/api.js';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { io } from 'socket.io-client';
-import { PlayerInfoType, RoomInfo } from '../type.js';
+import { PlayerInfoType, RoomInfo, VictoryInfo } from '../type.js';
 
-export default function usePlayersCards (): [PlayerInfoType[], PlayerInfoType | undefined, RoomInfo | undefined, [PlayerInfoType, number][]] {
+export default function usePlayersCards (): [PlayerInfoType[], PlayerInfoType | undefined, RoomInfo | undefined, [PlayerInfoType, VictoryInfo][]] {
     const [otherPlayers, setOtherPlayers] = useState<PlayerInfoType[]>([]);
     const [myPlayer, setMyPlayer] = useState<PlayerInfoType>();
-    const [victoryPlayers, setVictoryPlayers] = useState<[PlayerInfoType, number][]>([]);
+    const [victoryPlayers, setVictoryPlayers] = useState<[PlayerInfoType, VictoryInfo][]>([]);
     const [room, setRoom] = useState<RoomInfo>();
     const { roomId, userName } = useParams();
     const navigate = useNavigate();
@@ -53,7 +53,7 @@ export default function usePlayersCards (): [PlayerInfoType[], PlayerInfoType | 
                 console.log('other:', otherPlayers, 'my:', myPlayer);
             });
 
-            socket.on('victoryPlayers', (victoryPlayers: [PlayerInfoType, number][]) => {
+            socket.on('victoryPlayers', (victoryPlayers: [PlayerInfoType, VictoryInfo][]) => {
                 console.log('victoryPlayers', victoryPlayers);
               
                 setVictoryPlayers(victoryPlayers);

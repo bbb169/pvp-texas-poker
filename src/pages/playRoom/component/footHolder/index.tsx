@@ -5,6 +5,7 @@ import { infoContext } from '@/utils/infoContext.js';
 import { DollarOutlined } from '@ant-design/icons';
 import { css } from '@emotion/react';
 import { Button, Space } from 'antd';
+import * as React from 'react';
 import { useContext, useEffect, useState } from 'react';
 import { CardType } from '../../type.js';
 import { footHolderBlueBorderBox, footHolderBoxCss } from './style.js';
@@ -21,7 +22,7 @@ export default function FootHolder () {
         return <></>;
     }
 
-    const isCalling = player.status === 'calling';
+    const isCalling = player.status.includes('calling');
 
     return <div css={footHolderBlueBorderBox(isCalling)}>
         <div css={footHolderBoxCss}>

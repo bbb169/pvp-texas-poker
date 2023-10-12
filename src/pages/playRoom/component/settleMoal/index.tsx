@@ -4,7 +4,7 @@ import { Button, Modal } from 'antd';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
 export function SettleMoal () {
-    const { room, player, otherPlayers, victoryPlayers } = useContext(infoContext);
+    const { room, player, victoryPlayers } = useContext(infoContext);
     const [modalOpen, setModalOpen] = useState(true);
     const isButtonPlayer = room?.buttonIndex === player?.position;
 
@@ -16,16 +16,16 @@ export function SettleMoal () {
     }, [room?.statu]);
 
     const renderChildren = useMemo(() => {
-        if (room?.statu === 'settling' && player && otherPlayers) {
+        if (room?.statu === 'settling' && victoryPlayers) {
             return <div>
                 <h2>Victory players</h2>
                 {
-                    victoryPlayers?.map(([player, getChips]) => <h3 key={player.name}>{player.name}: get chips {getChips}</h3>)
+                    victoryPlayers?.map(([player, victoryInfo]) => <h3 key={player.name}>{player.name}: get chips {victoryInfo.getChips}, card type: {victoryInfo.cardName}</h3>)
                 }
             </div>;
         } 
         return <></>;
-    }, [room?.statu]);
+    }, [room?.statu, victoryPlayers]);
 
     return <Modal title="Settle" open={room?.statu === 'settling' && modalOpen} onCancel={() => {
         setModalOpen(false);
