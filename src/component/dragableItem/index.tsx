@@ -1,6 +1,5 @@
 import React from 'react';
-import type { DragEndEvent } from '@dnd-kit/core';
-import { DndContext, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { DndContext, useSensor, useSensors, DragEndEvent, TouchSensor, MouseSensor } from '@dnd-kit/core';
 import { SortableContext,
     arrayMove,
     useSortable,
@@ -36,7 +35,7 @@ function DragableItem<T extends DataType> ({ dataSource, renderFunc, setDataSour
   renderFunc: (data: T) => JSX.Element, 
   setDataSource: (datas: (datas: T[]) => T[]) => void 
 }) {
-    const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 1 } }),);
+    const sensors = useSensors(useSensor(MouseSensor, { activationConstraint: { distance: 1 } }), useSensor(TouchSensor, { activationConstraint: { distance: 1 } }));
 
     const onDragEnd = ({ active, over }: DragEndEvent) => {
         if (active.id !== over?.id) {
