@@ -2,7 +2,7 @@ import Card from '@/component/card/index.js';
 import { emitSocket } from '@/utils/api.js';
 import { infoContext } from '@/utils/infoContext.js';
 import { css } from '@emotion/react';
-import { Button, Modal, Tooltip } from 'antd';
+import { Button, Modal, Popconfirm } from 'antd';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
 export function SettleMoal () {
@@ -18,26 +18,25 @@ export function SettleMoal () {
     }, [room?.statu]);
 
     const renderChildren = useMemo(() => {
-        if (room?.statu === 'settling' && victoryPlayers) {
+        if (room?.statu === 'settling' && victoryPlayers?.length) {
             return <div>
                 <h2>Victory players</h2>
                 {
                     victoryPlayers?.map(([player, victoryInfo]) => <div key={player.name}>
-                        <Tooltip css={css`
-                            max-width: none;
-                        `}  title={
+                        <Popconfirm  title={
                             <div css={css`
                                 display: flex;
+                                justify-content: space-around;
                                 align-items: center;
-                                padding: 8px 0px;
-                                padding-right: 10vw;
                                 width: 80vw;
+                                color: black;
                             `}>
                                 {victoryInfo.cards && victoryInfo.cards.map(card => <Card {...card} key={card.key}/>)}
                             </div>
-                        } placement='bottom' trigger={'click'}>
+                        } placement='bottom' trigger={'click'} showCancel={false}
+                            icon={<></>}>
                             <Button type="primary" shape="round">{player.name}: get chips {victoryInfo.getChips}, card type: {victoryInfo.cardName}</Button>
-                        </Tooltip>
+                        </Popconfirm>
                     </div>)
                 }
             </div>;

@@ -27,6 +27,7 @@ const cardContentPublic = `
   box-sizing: border-box;
   border-radius: 10px;
   overflow: hidden;
+  border: 1px solid rgba(5, 5, 5, 0.06);
   ${boxHoverShadow}
 `;
 
