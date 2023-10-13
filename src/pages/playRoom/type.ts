@@ -42,3 +42,9 @@ export interface VictoryInfo {
   cardName: string;
   cards?: CardType[];
 }
+
+export interface GptPredicateRes {
+  winRate: number;
+  publcHighestCards: CardType[];
+  userHighestCards: CardType[];
+}

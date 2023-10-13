@@ -2,7 +2,7 @@ import { emitSocket, initSocket } from '@/utils/api.js';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { io } from 'socket.io-client';
-import { PlayerInfoType, RoomInfo, VictoryInfo } from '../type.js';
+import { GptPredicateRes, PlayerInfoType, RoomInfo, VictoryInfo } from '../type.js';
 
 export default function usePlayersCards (): [PlayerInfoType[], PlayerInfoType | undefined, RoomInfo | undefined, [PlayerInfoType, VictoryInfo][]] {
     const [otherPlayers, setOtherPlayers] = useState<PlayerInfoType[]>([]);
@@ -57,6 +57,10 @@ export default function usePlayersCards (): [PlayerInfoType[], PlayerInfoType | 
                 console.log('victoryPlayers', victoryPlayers);
               
                 setVictoryPlayers(victoryPlayers);
+            });
+
+            socket.on('getGptPredicate', (res: GptPredicateRes) => {
+                console.log('getGptPredicate', res);
             });
 
             // give room and player message to node serve
