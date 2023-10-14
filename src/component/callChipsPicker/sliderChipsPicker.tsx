@@ -3,16 +3,9 @@ import { PlayerInfoType } from '@/pages/playRoom/type.js';
 import { css } from '@emotion/react';
 import { Button, Slider, Tooltip } from 'antd';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
 
 export function SliderChipsPicker ({ player, minCallableChips } : { player: PlayerInfoType, minCallableChips: number }) {
-    const [callingChips, setCallingChips] = useState(0);
-    const { roomId, userName } = useParams();
-    const callChipsDirec = () => {
-        if (roomId && userName) {
-            callChips(callingChips);
-        }
-    };
+    const [callingChips, setCallingChips] = useState(minCallableChips - player.calledChips);
 
     return <>
         <Tooltip title={
@@ -23,14 +16,14 @@ export function SliderChipsPicker ({ player, minCallableChips } : { player: Play
         align-items: center;
         padding: 8px 4px;
       `}>
-        add <Slider css={css`
+        +{callingChips} <Slider css={css`
           width: 100px;
         `} value={callingChips} min={minCallableChips - player.calledChips} max={player.holdCent}
             onChange={(value: number) => setCallingChips(value)}/>
                 <Button type="primary" shape="round" onClick={() => {         
-                    callChipsDirec(); 
+                    callChips(callingChips);
                 }} danger={callingChips === player.holdCent}>
-          confirm
+                    confirm
                 </Button>
             </div>
             // ========== popup =================
