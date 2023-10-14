@@ -22,7 +22,7 @@ export default function FootHolder () {
         return <></>;
     }
 
-    const isCalling = player.status.includes('calling');
+    const isCalling = player.status.includes('calling') && room.statu === 'started';
 
     return <div css={footHolderBlueBorderBox(isCalling)}>
         <div css={footHolderBoxCss}>
