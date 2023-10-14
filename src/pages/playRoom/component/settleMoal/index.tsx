@@ -49,7 +49,7 @@ export function SettleMoal () {
                                 :                                                            <div>当前情况不能查看胜者牌型</div>
                         } placement='bottom' trigger={'click'} showCancel={false}
                             icon={<></>}>
-                            <Button type="primary" shape="round">{player.name}: get chips {victoryInfo.getChips}, card type: {victoryInfo.cardName}</Button>
+                            <Button type="primary" shape="round">{player.name}: get chips {victoryInfo.getChips} {victoryInfo.cardName ? `,card type: ${victoryInfo.cardName}` : ''}</Button>
                         </Popconfirm>
                     </div>)
                 }
