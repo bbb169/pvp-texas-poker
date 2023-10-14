@@ -1,4 +1,5 @@
 import { emitSocket, initSocket } from '@/utils/api.js';
+import { message } from 'antd';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { io } from 'socket.io-client';
@@ -71,10 +72,20 @@ export default function usePlayersCards (): [PlayerInfoType[], PlayerInfoType | 
         });
 
         socket.on('disconnect', () => {
+            message.info('已与房间断开连接');
             console.log('========== disconnected ws ===========');
         });
 
-        return () => { 
+        // =================== Heartbeat Detection ====================
+        socket.on('heartbeat', (data, callback) => {
+            console.log('============ heartbeat ==================');
+            
+            setTimeout(() => {
+                callback();
+            }, 5000);
+        });
+
+        return () => {
             socket.disconnect();
         };
     }, []);
