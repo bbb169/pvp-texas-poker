@@ -6,6 +6,7 @@ import { PublicCards } from './component/publicCards/index.js';
 import WaitingStart from './component/waitingStart/index.js';
 import { infoContext } from '@/utils/infoContext.js';
 import { SettleMoal } from './component/settleMoal/index.js';
+import { CustomFloatButton } from './component/customFloatButton/index.js';
 
 
 export function PlayRoom () {
@@ -19,6 +20,7 @@ export function PlayRoom () {
         victoryPlayers,
     }}>
         <div css={palyRoomPageCss}>
+            <CustomFloatButton/>
             <SettleMoal/>
             <div css={palyGroundCss} key='playGround'>
                 {/* show players avatar */}
