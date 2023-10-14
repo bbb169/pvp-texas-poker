@@ -6,6 +6,7 @@ import { SortableContext,
     horizontalListSortingStrategy, } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { restrictToParentElement } from '@dnd-kit/modifiers';
+import { Interpolation, Theme } from '@emotion/react';
 
 interface DataType {
   key: string;
@@ -30,10 +31,11 @@ const Row = (props: RowProps) => {
         {...listeners}>{props.children}</div>;
 };
 
-function DragableItem<T extends DataType> ({ dataSource, renderFunc, setDataSource } : { 
-  dataSource: T[], 
-  renderFunc: (data: T) => JSX.Element, 
-  setDataSource: (datas: (datas: T[]) => T[]) => void 
+function DragableItem<T extends DataType> ({ dataSource, renderFunc, setDataSource, cssProp } : { 
+  dataSource: T[];
+  renderFunc: (data: T) => JSX.Element; 
+  setDataSource: (datas: (datas: T[]) => T[]) => voidElement;
+  cssProp?: Interpolation<Theme>;
 }) {
     const sensors = useSensors(useSensor(MouseSensor, { activationConstraint: { distance: 1 } }), useSensor(TouchSensor, { activationConstraint: { distance: 1 } }));
 
@@ -58,7 +60,7 @@ function DragableItem<T extends DataType> ({ dataSource, renderFunc, setDataSour
                 strategy={horizontalListSortingStrategy}
             >
                 {
-                    dataSource.map(item => <Row data-row-key={item.key} key={item.key}>{renderFunc(item)}</Row>)
+                    dataSource.map(item => <Row css={cssProp} data-row-key={item.key} key={item.key}>{renderFunc(item)}</Row>)
                 }
             </SortableContext>
         </DndContext>

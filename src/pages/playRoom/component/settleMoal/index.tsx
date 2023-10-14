@@ -1,9 +1,11 @@
 import Card from '@/component/card/index.js';
+import DragableItem from '@/component/dragableItem/index.js';
 import { emitSocket } from '@/utils/api.js';
 import { infoContext } from '@/utils/infoContext.js';
 import { css } from '@emotion/react';
 import { Button, Modal, Popconfirm } from 'antd';
 import { useContext, useEffect, useMemo, useState } from 'react';
+import { CardType } from '../../type.js';
 
 export function SettleMoal () {
     const { room, player, victoryPlayers } = useContext(infoContext);
@@ -35,7 +37,14 @@ export function SettleMoal () {
                                     padding-right: calc(100px - 80vw/5);
                                     color: black;
                                 `}>
-                                    {victoryInfo.cards && victoryInfo.cards.map(card => <Card {...card} key={card.key}/>)}
+                                    {
+                                        <DragableItem 
+                                            cssProp={css`width: 20%;`}
+                                            dataSource={victoryInfo.cards} 
+                                            setDataSource={() => {}} 
+                                            renderFunc={(e) => <Card {...e as CardType} />}
+                                        />
+                                    }
                                 </div>
                                 :                                                            <div>当前情况不能查看胜者牌型</div>
                         } placement='bottom' trigger={'click'} showCancel={false}
