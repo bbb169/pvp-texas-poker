@@ -19,7 +19,9 @@ export function SettleMoal () {
 
     const renderChildren = useMemo(() => {
         if (room?.statu === 'settling' && victoryPlayers?.length) {
-            return <div>
+            return <div css={css`
+                text-align: center;
+            `}>
                 <h2>Victory players</h2>
                 {
                     victoryPlayers?.map(([player, victoryInfo]) => <div key={player.name}>
@@ -45,16 +47,22 @@ export function SettleMoal () {
         return <></>;
     }, [room?.statu, victoryPlayers]);
 
-    return <Modal title="Settle" open={room?.statu === 'settling' && modalOpen} onCancel={() => {
-        setModalOpen(false);
-    }} footer={
-        <Button onClick={() => {
+    return <Modal 
+        title={<div css={css`
+            text-align: center;
+        `   }>Settle</div>} 
+        open={room?.statu === 'settling' && modalOpen} 
+        onCancel={() => {
             setModalOpen(false);
-            isButtonPlayer && emitSocket('turnToNextGame');
-        }} type="primary" shape="round">
-            {isButtonPlayer ? 'turn to next game' : 'ok'}
-        </Button>
-    }>
+        }} 
+        footer={
+            <Button onClick={() => {
+                setModalOpen(false);
+                isButtonPlayer && emitSocket('turnToNextGame');
+            }} type="primary" shape="round">
+                {isButtonPlayer ? 'turn to next game' : 'ok'}
+            </Button>
+        }>
         {renderChildren}
     </Modal>;
 }
