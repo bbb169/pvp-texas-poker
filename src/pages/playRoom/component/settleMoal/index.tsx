@@ -29,6 +29,7 @@ export function SettleMoal () {
                                 justify-content: space-around;
                                 align-items: center;
                                 width: 80vw;
+                                padding-right: calc(100px - 80vw/5);
                                 color: black;
                             `}>
                                 {victoryInfo.cards && victoryInfo.cards.map(card => <Card {...card} key={card.key}/>)}
