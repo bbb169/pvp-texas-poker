@@ -1,6 +1,7 @@
 import { CallChipsPicker } from '@/component/callChipsPicker/index.js';
 import Card from '@/component/card/index.js';
 import DragableItem from '@/component/dragableItem/index.js';
+import { isEmpty } from '@/utils/index.js';
 import { infoContext } from '@/utils/infoContext.js';
 import { DollarOutlined } from '@ant-design/icons';
 import { css } from '@emotion/react';
@@ -27,25 +28,26 @@ export default function FootHolder () {
     return <div css={footHolderBlueBorderBox(true)}>
         <div css={footHolderBoxCss}>
             {isCalling && <CallChipsPicker />}
-            <div css={css`
+            {!isEmpty(holderCards) && <div css={css`
                 display: flex;
                 justify-content: space-evenly;
                 flex: 3;
-            `}>
-                {
-                    holderCards && <DragableItem 
-                        dataSource={holderCards} 
-                        setDataSource={setHolderCards as React.Dispatch<React.SetStateAction<CardType[]>>} 
-                        renderFunc={(e) => <Card {...e as CardType} />}
-                    />
-                }
-            </div>
+            `}
+                data-intro="此处为您持有的牌型"
+            >
+                <DragableItem 
+                    dataSource={holderCards} 
+                    setDataSource={setHolderCards as React.Dispatch<React.SetStateAction<CardType[]>>} 
+                    renderFunc={(e) => <Card {...e as CardType} />}
+                />
+            </div>}
             {/* ================ Chips Account ================ */}
             <Space css={css`
                 display: flex;
                 flex-direction: column;
                 flex: 2;
-            `}>
+            `}
+                data-intro="此处为您的筹码和游戏信息">
                 <Button icon={<DollarOutlined />} type="primary"shape="round">盲注: {player.blind}</Button>
                 <Button icon={<DollarOutlined />} type="primary" shape="round">已投注: {player.calledChips}</Button>
                 <Button icon={<DollarOutlined />} type="primary" shape="round" danger>现持有:{player.holdCent}</Button>

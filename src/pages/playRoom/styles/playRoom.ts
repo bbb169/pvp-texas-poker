@@ -37,6 +37,6 @@ export const CardsFlexBoxDiv = styled.div`
   align-items: center;
   width: 80%;
   margin-bottom: 20px;
-  padding-right: calc(100px - 80vw/5);
+  padding-right: calc(100px - 80%/5);
   color: black;
 `;

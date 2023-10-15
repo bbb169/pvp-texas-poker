@@ -7,7 +7,7 @@ import WaitingStart from './component/waitingStart/index.js';
 import { infoContext } from '@/utils/infoContext.js';
 import { SettleMoal } from './component/settleMoal/index.js';
 import { CustomFloatButton } from './component/customFloatButton/index.js';
-
+import { isEmpty } from '@/utils/index.js';
 
 export function PlayRoom () {
     const [otherPlayers, player, room, victoryPlayers] = usePlayersCards();
@@ -24,12 +24,12 @@ export function PlayRoom () {
             <SettleMoal/>
             <div css={palyGroundCss} key='playGround'>
                 {/* show players avatar */}
-                <div css={playGroundTopUsersBoxCss}>
+                {!isEmpty(otherPlayers) && <div css={playGroundTopUsersBoxCss} data-intro="可以查看其它玩家信息">
                     {
-                        otherPlayers?.map(player => <PlayerBox player={player} key={player.position}/>)
+                        otherPlayers.map(player => <PlayerBox player={player} key={player.position}/>)
                     }
-                </div>
-                {room?.publicCards && <DemoCards cards={room?.publicCards} />}
+                </div>}
+                {!isEmpty(room?.publicCards) && <DemoCards data-intro="公共牌堆，随着轮次依次展示，所有牌均可拖动，但是有些不会改变牌的顺序" cards={room?.publicCards} />}
                 {/* starting game or waiting */}
                 {room && room.statu !== 'started'                 && 
                 <WaitingStart isButtonPosition={isButtonPosition} hasOtherPlayers= {otherPlayers.length}/>}

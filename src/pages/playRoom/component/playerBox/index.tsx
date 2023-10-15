@@ -13,8 +13,8 @@ export default function PlayerBox ({ player } : { player: PlayerInfoType }) {
 
     const playerInfo = <div>
         <div>{`${player.name} ${player.status}`}</div>
-        <div>hold: {player.holdCent}</div>
-        <div>betted: {player.calledChips}</div>
+        <div>持有: {player.holdCent}</div>
+        <div>已下注: {player.calledChips}</div>
     </div>;
 
     return <>

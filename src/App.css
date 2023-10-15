@@ -5,3 +5,8 @@
   text-align: center;
   overflow: hidden;
 }
+
+body {
+  overflow: hidden;
+  position: relative;
+}

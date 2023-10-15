@@ -40,7 +40,7 @@ const CardsTypeBoxDiv = styled.div`
 
 export default function CardsTypeCompareGuide () {
     const [activeTab, setActiveTab] = useState('1');
-    const items = new Array(2).fill(null).map((_, i) => {
+    const items = new Array(2).fill(null).map((__, i) => {
         return {
             label: i === 0 ? '长牌大小' : '短牌大小',
             key: `${i + 1}`,

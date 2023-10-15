@@ -29,6 +29,9 @@ dependencies:
   crypto-js:
     specifier: ^4.1.1
     version: 4.1.1
+  intro.js:
+    specifier: ^7.2.0
+    version: 7.2.0
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -76,6 +79,9 @@ devDependencies:
   '@types/crypto-js':
     specifier: ^4.1.2
     version: 4.1.2
+  '@types/intro.js':
+    specifier: ^5.1.2
+    version: 5.1.2
   '@types/jest':
     specifier: ^29.5.5
     version: 29.5.5
@@ -2448,6 +2454,10 @@ packages:
       '@types/node': 20.7.0
     dev: true
 
+  /@types/intro.js@5.1.2:
+    resolution: {integrity: sha512-SEG0YzfNhayCP0Q8OLCLAyBIzqCjYLGM4TfDCXveooVBp5GQy/9J2Ontxp+6oAis4qerZJeYy/b5jcijqOl7CQ==}
+    dev: true
+
   /@types/istanbul-lib-coverage@2.0.4:
     resolution: {integrity: sha512-z/QT1XN4K4KYuslS23k62yDIDLwLFkzxOuMplDtObz0+y7VqJCaO2o+SPwHCvLFZh7xazvvoor2tA/hPz9ee7g==}
     dev: true
@@ -4235,6 +4245,10 @@ packages:
       has: 1.0.3
       side-channel: 1.0.4
     dev: true
+
+  /intro.js@7.2.0:
+    resolution: {integrity: sha512-qbMfaB70rOXVBceIWNYnYTpVTiZsvQh/MIkfdQbpA9di9VBfj1GigUPfcCv3aOfsbrtPcri8vTLTA4FcEDcHSQ==}
+    dev: false
 
   /is-arguments@1.1.1:
     resolution: {integrity: sha512-8Q7EARjzEnKpt/PCD7e1cgUS0a6X8u5tdSiMqXhojOdoV9TsMsiO+9VLC5vAmO8N7/GmXn7yjR8qnA6bVAEzfA==}

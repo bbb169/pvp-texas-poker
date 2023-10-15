@@ -28,14 +28,15 @@ export interface PlayerInfoType {
 
 export interface RoomInfo {
   publicCards: CardType[];
-  players: PlayerInfoType[];
+  players: Map<string, PlayerInfoType>;
   buttonIndex: number;
-  playerMap: Set<string>;
-  statu: 'waiting' | 'started' | 'settling',
+  statu: 'waiting' | 'started' | 'settling';
   currentCallChips: number;
   currentHasChips: number;
+  callingSteps: number;
   smallBlind: number;
   bigBlind: number;
+  isShortCards: boolean;
 }
 
 export interface VictoryInfo {

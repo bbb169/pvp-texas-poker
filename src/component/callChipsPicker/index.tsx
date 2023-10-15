@@ -19,7 +19,7 @@ export function CallChipsPicker () {
     return <Space css={css`
     position: absolute;
     top: -100px
-  `} direction='vertical'>
+  `} direction='vertical' data-intro="当轮到您下注时，请选择自己想要的下注大小">
         <Space css={css`
             flex-wrap: wrap;
             justify-content: center;
@@ -33,7 +33,7 @@ export function CallChipsPicker () {
                     </Button>;
                 })
             }
-            <SliderChipsPicker player={player} minCallableChips={minCallableChips}/>
+            <SliderChipsPicker player={player} minCallableChips={minCallableChips} data-intro="点击这里可以通过滑动条灵活选择"/>
             <Button type="primary" shape="round" danger onClick={() => callChips(player.holdCent)}>
                 全下
             </Button>
@@ -42,6 +42,7 @@ export function CallChipsPicker () {
             }}>
                 弃牌
             </Button>
+            {room.statu !== 'waiting' && <Button type="primary"shape="round">游戏规则: {room.isShortCards === false ? '长牌' : '短牌'}</Button>}
         </Space>
     </Space>;
 }

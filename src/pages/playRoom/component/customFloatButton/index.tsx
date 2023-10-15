@@ -1,8 +1,10 @@
-import { Button, Popconfirm, Tooltip } from 'antd';
+import { Button, Popconfirm } from 'antd';
 import { LeftOutlined, QuestionOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
 import CardsTypeCompareGuide from '../cardsTypeCompareGuide/index.js';
+import * as introJs from 'intro.js';
+import 'intro.js/introjs.css';
 
 const getFloatCss = (isRight = false) => css`
   position: absolute;
@@ -22,17 +24,25 @@ export function CustomFloatButton () {
             shape='circle' 
             onClick={() => {
                 navigate('/');
-            }}/>
+            }}
+            data-intro="点击此处退出房间"
+        />
         <Popconfirm
             title="规则"
             description={<CardsTypeCompareGuide/>}
-            okText="Yes"
-            cancelText="No"
+            okText="想了解更多（功能引导）"
+            cancelText="已了解"
+            placement='bottomLeft'
+            onConfirm={() => {
+                introJs.default().start(); 
+            }}
         >
-            <Tooltip title='了解更多' placement='left'><Button 
-                css={getFloatCss(true)} icon={<QuestionOutlined />}
+            <Button 
+                css={getFloatCss(true)} 
+                icon={<QuestionOutlined />}
                 type='primary'
-                shape='circle'/></Tooltip>
+                shape='circle'
+            />
         </Popconfirm>
         
     </>;
