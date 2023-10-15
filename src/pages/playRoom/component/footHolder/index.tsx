@@ -24,7 +24,7 @@ export default function FootHolder () {
 
     const isCalling = player.status.includes('calling') && room.statu === 'started';
 
-    return <div css={footHolderBlueBorderBox(isCalling)}>
+    return <div css={footHolderBlueBorderBox(true)}>
         <div css={footHolderBoxCss}>
             {isCalling && <CallChipsPicker />}
             <div css={css`
