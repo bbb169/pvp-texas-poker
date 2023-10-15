@@ -29,18 +29,18 @@ export function CallChipsPicker () {
                     const isEffectCall = item <= player.holdCent && item + player.calledChips >= minCallableChips;
 
                     return isEffectCall && <Button type="primary" shape="round" key={item} onClick={() => callChips(item)}>
-            +{item}
+                        +{item}
                     </Button>;
                 })
             }
             <SliderChipsPicker player={player} minCallableChips={minCallableChips}/>
             <Button type="primary" shape="round" danger onClick={() => callChips(player.holdCent)}>
-        All in
+                全下
             </Button>
             <Button type="primary" shape="round" danger onClick={() => {
                 callChips();
             }}>
-        Fold
+                弃牌
             </Button>
         </Space>
     </Space>;

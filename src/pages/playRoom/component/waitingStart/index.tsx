@@ -6,10 +6,10 @@ export default function WaitingStart ({ isButtonPosition, hasOtherPlayers }: { i
         ? <Space>
             <Button type="primary" shape="round" danger onClick={() => {
                 startGame(true);
-            }}>Play short cards</Button>
+            }}>选择短牌进行游戏</Button>
             <Button type="primary" shape="round" onClick={() => {
                 startGame();
-            }}>Play long cards</Button>
+            }}>选择长牌进行游戏</Button>
         </Space>
-        :    <Button type="primary">Waiting For Starting Game</Button>;
+        :    <Button type="primary">{!isButtonPosition ? '请等待庄家开始游戏' : '请等待其它玩家加入'}</Button>;
 }

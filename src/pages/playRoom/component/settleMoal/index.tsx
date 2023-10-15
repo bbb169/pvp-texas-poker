@@ -2,6 +2,7 @@ import Card from '@/component/card/index.js';
 import DragableItem from '@/component/dragableItem/index.js';
 import { emitSocket } from '@/utils/api.js';
 import { infoContext } from '@/utils/infoContext.js';
+import { cardTypeTranslateMap } from '@/utils/tanslate.js';
 import { css } from '@emotion/react';
 import { Button, Modal, Popconfirm } from 'antd';
 import { useContext, useEffect, useMemo, useState } from 'react';
@@ -24,7 +25,7 @@ export function SettleMoal () {
             return <div css={css`
                 text-align: center;
             `}>
-                <h2>Victory players</h2>
+                <h2>获胜玩家</h2>
                 {
                     victoryPlayers?.map(([player, victoryInfo]) => <div key={player.name}>
                         <Popconfirm  title={
@@ -49,7 +50,7 @@ export function SettleMoal () {
                                 :                                                            <div>当前情况不能查看胜者牌型</div>
                         } placement='bottom' trigger={'click'} showCancel={false}
                             icon={<></>}>
-                            <Button type="primary" shape="round">{player.name}: get chips {victoryInfo.getChips} {victoryInfo.cardName ? `,card type: ${victoryInfo.cardName}` : ''}</Button>
+                            <Button type="primary" shape="round">{player.name}: 收获筹码： {victoryInfo.getChips} {victoryInfo.cardName ? `，牌型: ${cardTypeTranslateMap[victoryInfo.cardName]}` : ''}</Button>
                         </Popconfirm>
                     </div>)
                 }
@@ -61,7 +62,7 @@ export function SettleMoal () {
     return <Modal 
         title={<div css={css`
             text-align: center;
-        `   }>Settle</div>} 
+        `   }>结算</div>} 
         open={room?.statu === 'settling' && modalOpen} 
         onCancel={() => {
             setModalOpen(false);
@@ -71,7 +72,7 @@ export function SettleMoal () {
                 setModalOpen(false);
                 isButtonPlayer && emitSocket('turnToNextGame');
             }} type="primary" shape="round">
-                {isButtonPlayer ? 'turn to next game' : 'ok'}
+                {isButtonPlayer ? '开始下一轮' : '确认'}
             </Button>
         }>
         {renderChildren}

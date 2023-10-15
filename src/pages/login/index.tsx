@@ -32,7 +32,7 @@ const Login = () => {
                     <Button type="primary" block css={marginBottom16} onClick={() => {
                         navigate(`/playRoom/${roomId}/${userName}`);
                     }}>
-                Login
+                        进入
                     </Button>
                 </div>
             </LoginBox>

@@ -1,3 +1,4 @@
+import { cardTypeTranslateMap } from '@/utils/tanslate.js';
 
 export type CardColor = 'diamonds' | 'hearts' | 'spades' | 'clubs';
 export type CardStatu = 'undistributed' | 'distributed' | 'determineVictory';
@@ -39,7 +40,7 @@ export interface RoomInfo {
 
 export interface VictoryInfo {
   getChips: number;
-  cardName?: string;
+  cardName?: keyof typeof cardTypeTranslateMap;
   cards?: CardType[];
 }
 

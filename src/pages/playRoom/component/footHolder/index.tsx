@@ -46,10 +46,10 @@ export default function FootHolder () {
                 flex-direction: column;
                 flex: 2;
             `}>
-                <Button icon={<DollarOutlined />} type="primary"shape="round">Blind: {player.blind}</Button>
-                <Button icon={<DollarOutlined />} type="primary" shape="round">Betted: {player.calledChips}</Button>
-                <Button icon={<DollarOutlined />} type="primary" shape="round" danger>Holding:{player.holdCent}</Button>
-                {room && room.statu !== 'waiting' && <Button icon={<DollarOutlined />} type="primary" shape="round">Minimum Call:{Math.max(room?.currentCallChips, player.blind, 0)}</Button>}
+                <Button icon={<DollarOutlined />} type="primary"shape="round">盲注: {player.blind}</Button>
+                <Button icon={<DollarOutlined />} type="primary" shape="round">已投注: {player.calledChips}</Button>
+                <Button icon={<DollarOutlined />} type="primary" shape="round" danger>现持有:{player.holdCent}</Button>
+                {room && room.statu !== 'waiting' && <Button icon={<DollarOutlined />} type="primary" shape="round">现最小下注:{Math.max(room?.currentCallChips, player.blind, 0)}</Button>}
             </Space>
         </div>
     </div>;
