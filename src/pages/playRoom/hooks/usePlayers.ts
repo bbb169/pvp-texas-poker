@@ -77,12 +77,10 @@ export default function usePlayersCards (): [PlayerInfoType[], PlayerInfoType | 
         });
 
         // =================== Heartbeat Detection ====================
-        socket.on('heartbeat', (data, callback) => {
+        socket.on('heartbeat', (callback) => {
             console.log('============ heartbeat ==================');
             
-            setTimeout(() => {
-                callback();
-            }, 5000);
+            callback();
         });
 
         return () => {

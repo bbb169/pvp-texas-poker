@@ -27,9 +27,17 @@ export function SettleMoal () {
                 {
                     victoryPlayers?.map(([player, victoryInfo]) => <div key={player.name}>
                         <Popconfirm  title={
-                            victoryInfo.cards
-                                ? <DemoCards cards={victoryInfo.cards}/>
-                                :                                                            <div>当前情况不能查看胜者牌型</div>
+                            <div css={css`
+                            width: 80vw;
+                            display: flex;
+                            justify-content: center;
+                            `}>
+                                {
+                                    victoryInfo.cards
+                                        ? <DemoCards cards={victoryInfo.cards}/>
+                                        :                                                            <div>当前情况不能查看胜者牌型</div>
+                                }
+                            </div>
                         } placement='bottom' trigger={'click'} showCancel={false}
                             icon={<></>}>
                             <Button type="primary" shape="round">{player.name}: 收获筹码： {victoryInfo.getChips} {victoryInfo.cardName ? `，牌型: ${cardTypeTranslateMap[victoryInfo.cardName]}` : ''}</Button>
