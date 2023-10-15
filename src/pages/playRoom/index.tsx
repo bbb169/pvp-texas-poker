@@ -2,7 +2,7 @@ import FootHolder from './component/footHolder/index.js';
 import { palyGroundCss, palyRoomPageCss, playGroundTopUsersBoxCss } from './styles/playRoom.js';
 import PlayerBox from './component/playerBox/index.js';
 import usePlayersCards from './hooks/usePlayers.js';
-import { PublicCards } from './component/publicCards/index.js';
+import DemoCards from './component/demoCards/index.js';
 import WaitingStart from './component/waitingStart/index.js';
 import { infoContext } from '@/utils/infoContext.js';
 import { SettleMoal } from './component/settleMoal/index.js';
@@ -29,7 +29,7 @@ export function PlayRoom () {
                         otherPlayers?.map(player => <PlayerBox player={player} key={player.position}/>)
                     }
                 </div>
-                <PublicCards />
+                {room?.publicCards && <DemoCards cards={room?.publicCards} />}
                 {/* starting game or waiting */}
                 {room && room.statu !== 'started'                 && 
                 <WaitingStart isButtonPosition={isButtonPosition} hasOtherPlayers= {otherPlayers.length}/>}

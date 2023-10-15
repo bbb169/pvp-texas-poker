@@ -1,12 +1,10 @@
-import Card from '@/component/card/index.js';
-import DragableItem from '@/component/dragableItem/index.js';
 import { emitSocket } from '@/utils/api.js';
 import { infoContext } from '@/utils/infoContext.js';
 import { cardTypeTranslateMap } from '@/utils/tanslate.js';
 import { css } from '@emotion/react';
 import { Button, Modal, Popconfirm } from 'antd';
 import { useContext, useEffect, useMemo, useState } from 'react';
-import { CardType } from '../../type.js';
+import DemoCards from '../demoCards/index.js';
 
 export function SettleMoal () {
     const { room, player, victoryPlayers } = useContext(infoContext);
@@ -30,23 +28,7 @@ export function SettleMoal () {
                     victoryPlayers?.map(([player, victoryInfo]) => <div key={player.name}>
                         <Popconfirm  title={
                             victoryInfo.cards
-                                ? <div css={css`
-                                    display: flex;
-                                    justify-content: space-around;
-                                    align-items: center;
-                                    width: 80vw;
-                                    padding-right: calc(100px - 80vw/5);
-                                    color: black;
-                                `}>
-                                    {
-                                        <DragableItem 
-                                            cssProp={css`width: 20%;`}
-                                            dataSource={victoryInfo.cards} 
-                                            setDataSource={() => {}} 
-                                            renderFunc={(e) => <Card {...e as CardType} />}
-                                        />
-                                    }
-                                </div>
+                                ? <DemoCards cards={victoryInfo.cards}/>
                                 :                                                            <div>当前情况不能查看胜者牌型</div>
                         } placement='bottom' trigger={'click'} showCancel={false}
                             icon={<></>}>
