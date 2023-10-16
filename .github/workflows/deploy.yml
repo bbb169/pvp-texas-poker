@@ -51,7 +51,7 @@ jobs:
           "
 
       - name: 将编译后的包复制到远程服务器对应目录
-        run: scp -r ./dist root@${{secrets.REMOTE_HOST}}:/root/${{secrets.REMOTE_WEB_DIR}}
+        run: scp -r ./dist root@${{secrets.REMOTE_HOST}}:/${{secrets.REMOTE_WEB_DIR}}
 
       - name: 删除 id_rsa
         run: rm -rf ~/.ssh/id_rsa
