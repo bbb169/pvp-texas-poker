@@ -14,7 +14,7 @@ export default function usePlayersCards (): [PlayerInfoType[], PlayerInfoType | 
     const navigate = useNavigate();
   
     useEffect(() => {
-        const socket = io('http://localhost:4000');
+        const socket = io('http://152.136.254.142:4001');
         // client-side
         socket.on('connect', () => {
             console.log('========== we are connecting ws ===========');
