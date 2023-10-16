@@ -40,7 +40,7 @@ export default defineConfig({
     ],
     server: {
         host: '0.0.0.0', // 指定监听的IP地址
-        port: 3333, // 指定服务器端口
+        port: 4000, // 指定服务器端口
         open: true, // 开发服务器启动时，自动在浏览器打开
         strictPort: false, // 设为 true 时，若端口已被占用会直接退出，不会尝试下一个可用端口
         https: true, // 是否开启 https 服务
