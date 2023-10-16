@@ -33,8 +33,8 @@ const Row = (props: RowProps) => {
 
 function DragableItem<T extends DataType> ({ dataSource, renderFunc, setDataSource, cssProp } : { 
   dataSource: T[];
-  renderFunc: (data: T) => JSX.Element; 
-  setDataSource: (datas: (datas: T[]) => T[]) => voidElement;
+  renderFunc: (data: T) => React.JSX.Element; 
+  setDataSource: (datas: (datas: T[]) => T[]) => void;
   cssProp?: Interpolation<Theme>;
 }) {
     const sensors = useSensors(useSensor(MouseSensor, { activationConstraint: { distance: 1 } }), useSensor(TouchSensor, { activationConstraint: { distance: 1 } }));

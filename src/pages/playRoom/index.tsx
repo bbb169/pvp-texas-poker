@@ -8,6 +8,7 @@ import { infoContext } from '@/utils/infoContext.js';
 import { SettleMoal } from './component/settleMoal/index.js';
 import { CustomFloatButton } from './component/customFloatButton/index.js';
 import { isEmpty } from '@/utils/index.js';
+import { CardType } from './type.js';
 
 export function PlayRoom () {
     const [otherPlayers, player, room, victoryPlayers] = usePlayersCards();
@@ -29,7 +30,7 @@ export function PlayRoom () {
                         otherPlayers.map(player => <PlayerBox player={player} key={player.position}/>)
                     }
                 </div>}
-                {!isEmpty(room?.publicCards) && <DemoCards data-intro="公共牌堆，随着轮次依次展示，所有牌均可拖动，但是有些不会改变牌的顺序" cards={room?.publicCards} />}
+                {!isEmpty(room?.publicCards) && <DemoCards data-intro="公共牌堆，随着轮次依次展示，所有牌均可拖动，但是有些不会改变牌的顺序" cards={room?.publicCards as CardType[]} />}
                 {/* starting game or waiting */}
                 {room && room.statu !== 'started'                 && 
                 <WaitingStart isButtonPosition={isButtonPosition} hasOtherPlayers= {otherPlayers.length}/>}

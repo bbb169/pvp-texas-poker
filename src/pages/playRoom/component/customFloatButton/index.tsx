@@ -3,8 +3,10 @@ import { LeftOutlined, QuestionOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { css } from '@emotion/react';
 import CardsTypeCompareGuide from '../cardsTypeCompareGuide/index.js';
-import * as introJs from 'intro.js';
+import introJs from 'intro.js';
 import 'intro.js/introjs.css';
+
+const Introduct = introJs as unknown as () => { start: () => void };
 
 const getFloatCss = (isRight = false) => css`
   position: absolute;
@@ -34,7 +36,7 @@ export function CustomFloatButton () {
             cancelText="已了解"
             placement='bottomLeft'
             onConfirm={() => {
-                introJs.default().start(); 
+                Introduct().start();
             }}
         >
             <Button 

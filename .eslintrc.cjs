@@ -108,7 +108,7 @@ module.exports = {
         indent: ['error', 4, { SwitchCase: 1, ignoredNodes: ['JSXAttribute'] }],
         'react/jsx-indent-props': ['error', 4],
         // "react/jsx-indent": "error",
-        'no-unused-vars': ['error', { varsIgnorePattern: '' }],
+        'no-unused-vars': ['warn', { varsIgnorePattern: '' }],
         'no-shadow': ['off'],
         'no-undef': ['error'],
         'no-debugger': ['error'],
@@ -133,6 +133,7 @@ module.exports = {
         'space-infix-ops': 2,
         // 强制在一元操作符前后使用一致的空格
         'space-unary-ops': [2, { words: true, nonwords: false }],
+        '@typescript-eslint/no-explicit-any': ['warn'],
         // 强制在注释中 // 或 /* 使用一致的空格
         'spaced-comment': [
             'error', 'always', {
