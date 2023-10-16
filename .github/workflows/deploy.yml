@@ -1,0 +1,53 @@
+name: deploy pvp-texas-poker
+
+on:
+  push:
+    branches:
+      - "master" # 针对 master 分支
+    paths:
+      - ".github/workflows/*"
+      - "src/**"
+      - "public/*"
+      - "package.json"
+      - "vite.config.ts"
+      - "index.html"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 拉取项目代码
+        uses: actions/checkout@v3
+
+      - name: 设置 node 环境
+        uses: actions/setup-node@v3
+        with:
+          node-version: "19.1.0"
+
+      - name: 安装依赖
+        run: pnpm install
+
+      - name: 编译打包
+        run: pnpm run build
+
+      - name: 设置 id_rsa
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${{secrets.VORTESNAIL_ID_RSA}}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan ${{secrets.REMOTE_HOST}} >> ~/.ssh/known_hosts
+          cat ~/.ssh/known_hosts
+
+      - name: 将远程服务器的对应目录下所有文件及文件夹删除
+        run: | # www/wwwroot/pvp-texas-poker
+          ssh root@${{secrets.REMOTE_HOST}} "
+            cd ${{secrets.REMOTE_WEB_DIR}};
+            rm -rf ./*;
+          "
+
+      - name: 将编译后的包复制到远程服务器对应目录
+        run: scp -r ./dist root@${{secrets.REMOTE_HOST}}:/root/${{secrets.REMOTE_WEB_DIR}}
+
+      - name: 删除 id_rsa
+        run: rm -rf ~/.ssh/id_rsa
