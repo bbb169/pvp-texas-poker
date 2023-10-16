@@ -25,6 +25,9 @@ jobs:
         with:
           node-version: "19.1.0"
 
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - name: 安装依赖
         run: pnpm install
 
