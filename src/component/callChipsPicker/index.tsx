@@ -43,6 +43,7 @@ export function CallChipsPicker () {
                 弃牌
             </Button>
             {room.statu !== 'waiting' && <Button type="primary"shape="round">游戏规则: {room.isShortCards === false ? '长牌' : '短牌'}</Button>}
+            {player.debt !== 0 && <Button type="primary"shape="round">您已负债:{player.debt}</Button>}
         </Space>
     </Space>;
 }

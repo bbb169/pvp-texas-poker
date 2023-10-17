@@ -15,6 +15,7 @@ export default function PlayerBox ({ player } : { player: PlayerInfoType }) {
         <div>{`${player.name} ${player.status}`}</div>
         <div>持有: {player.holdCent}</div>
         <div>已下注: {player.calledChips}</div>
+        <div>已负债: {player.debt}</div>
     </div>;
 
     return <>

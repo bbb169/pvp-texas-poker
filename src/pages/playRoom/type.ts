@@ -21,9 +21,12 @@ export interface PlayerInfoType {
   position: number;
   status: PlayerInfoStatusType[];
   holdCards: CardType[];
+  debt: number;
   calledChips: number;
   holdCent: number;
   blind: number;
+  /** whether called in one round */
+  roundCalled: boolean;
 }
 
 export interface RoomInfo {
