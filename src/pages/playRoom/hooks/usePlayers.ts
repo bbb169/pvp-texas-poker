@@ -1,4 +1,4 @@
-import { emitSocket, initSocket } from '@/utils/api.js';
+import { apiHost, emitSocket, initSocket } from '@/utils/api.js';
 import { message } from 'antd';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -14,7 +14,7 @@ export default function usePlayersCards (): [PlayerInfoType[], PlayerInfoType | 
     const navigate = useNavigate();
   
     useEffect(() => {
-        const socket = io('http://152.136.254.142:5000');
+        const socket = io(`${apiHost}:5000`);
         // client-side
         socket.on('connect', () => {
             console.log('========== we are connecting ws ===========');
