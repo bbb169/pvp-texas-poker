@@ -11,7 +11,7 @@ export const cardTypeTranslateMap = {
     Straight: '顺子', 
     'Three of a Kind': '三条', 
     'Two Pair': '两对', 
-    'One Pair': '一对', 
+    Pair: '一对', 
     'High Card': '高牌',
 };
 
