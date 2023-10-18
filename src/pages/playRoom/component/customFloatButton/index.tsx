@@ -1,19 +1,13 @@
 import { Button, Popconfirm } from 'antd';
 import { LeftOutlined, QuestionOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { css } from '@emotion/react';
 import CardsTypeCompareGuide from '../cardsTypeCompareGuide/index.js';
 import introJs from 'intro.js';
 import 'intro.js/introjs.css';
+import { getFloatCss } from '../../styles/playRoom.js';
+// import AudioButton from '../audioButton/index.js';
 
 const Introduct = introJs as unknown as () => { start: () => void };
-
-const getFloatCss = (isRight = false) => css`
-  position: absolute;
-  top: 2vh;
-  ${isRight ? 'right' : 'left'}: 4vw;
-  z-index: 999;
-`;
 
 export function CustomFloatButton () {
     const navigate = useNavigate();
@@ -46,6 +40,6 @@ export function CustomFloatButton () {
                 shape='circle'
             />
         </Popconfirm>
-        
+        {/* <AudioButton /> */}
     </>;
 }

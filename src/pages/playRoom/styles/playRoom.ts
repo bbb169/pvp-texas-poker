@@ -40,3 +40,12 @@ export const CardsFlexBoxDiv = styled.div`
   padding-right: calc(100px - 80%/5);
   color: black;
 `;
+
+// ========================= float buttons ===============
+
+export const getFloatCss = (isRight = false, top = 2) => css`
+  position: absolute;
+  top: ${top}vh;
+  ${isRight ? 'right' : 'left'}: 4vw;
+  z-index: 999;
+`;

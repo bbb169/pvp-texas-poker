@@ -1,4 +1,3 @@
-import { translateStringToCard } from '@/utils/tanslate.js';
 import { css } from '@emotion/react';
 import { Tabs } from 'antd';
 import { useState } from 'react';
@@ -6,6 +5,7 @@ import { CardType } from '../../type.js';
 import DemoCards from '../demoCards/index.js';
 import styled from '@emotion/styled';
 import { customScrollBar } from '@/styles/scrollbar.js';
+import { translateStringToCard } from '@/utils/const.js';
 
 const getCards = (isShortCards = false): [string, CardType[]][] => {
     const diffCardsStr: [string, string[]][] = [
