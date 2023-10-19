@@ -1,4 +1,4 @@
-import { apiHost, emitSocket, initSocket } from '@/utils/api.js';
+import { apiHost, apiPort, emitSocket, initSocket } from '@/utils/api.js';
 import { message } from 'antd';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { GptPredicateRes, PlayerInfoType, RoomInfo, VictoryInfo } from '../type.
 import usePlayersInfo from './usePlayersInfo.js';
 import useRoom from './useRoom.js';
 
-export default function useInfosFromSocket (): [PlayerInfoType[], PlayerInfoType | undefined, RoomInfo | undefined, [PlayerInfoType, VictoryInfo][]] {
+export default function useInfosFromSocket (): [PlayerInfoType[], PlayerInfoType | undefined, RoomInfo | undefined, [PlayerInfoType, VictoryInfo][], Socket | undefined] {
     const [socket, setSocket] = useState<Socket>();
     const [room] = useRoom(socket);
     const [otherPlayers, myPlayer, victoryPlayers] = usePlayersInfo(socket);
@@ -16,7 +16,7 @@ export default function useInfosFromSocket (): [PlayerInfoType[], PlayerInfoType
   
     useEffect(() => {
         if (!socket) {
-            setSocket(io(`${apiHost}:5000`));
+            setSocket(io(`${apiHost}:${apiPort}`));
         } else {
             // client-side
             socket.on('connect', () => {
@@ -66,5 +66,5 @@ export default function useInfosFromSocket (): [PlayerInfoType[], PlayerInfoType
         };
     }, [socket]);
 
-    return [otherPlayers, myPlayer, room, victoryPlayers];
+    return [otherPlayers, myPlayer, room, victoryPlayers, socket];
 }
