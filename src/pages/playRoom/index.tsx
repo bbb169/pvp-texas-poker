@@ -1,7 +1,7 @@
 import FootHolder from './component/footHolder/index.js';
 import { palyGroundCss, palyRoomPageCss, playGroundTopUsersBoxCss } from './styles/playRoom.js';
 import PlayerBox from './component/playerBox/index.js';
-import useInfosFromSocket from './hooks/usePlayers.js';
+import useInfosFromSocket from './hooks/useInfosFromSocket.js';
 import DemoCards from './component/demoCards/index.js';
 import WaitingStart from './component/waitingStart/index.js';
 import { infoContext } from '@/utils/infoContext.js';
@@ -11,7 +11,7 @@ import { isEmpty } from '@/utils/index.js';
 import { CardType } from './type.js';
 
 export function PlayRoom () {
-    const [otherPlayers, player, room, victoryPlayers] = useInfosFromSocket();
+    const [otherPlayers, player, room, victoryPlayers, socket] = useInfosFromSocket();
     const  isButtonPosition = Boolean(room && player && room.buttonIndex === player.position);
     
     return <infoContext.Provider value={{
@@ -19,6 +19,7 @@ export function PlayRoom () {
         player,
         otherPlayers,
         victoryPlayers,
+        socket,
     }}>
         <div css={palyRoomPageCss}>
             <CustomFloatButton/>

@@ -5,7 +5,7 @@ import CardsTypeCompareGuide from '../cardsTypeCompareGuide/index.js';
 import introJs from 'intro.js';
 import 'intro.js/introjs.css';
 import { getFloatCss } from '../../styles/playRoom.js';
-// import AudioButton from '../audioButton/index.js';
+import AudioButton from '../audioButton/index.js';
 
 const Introduct = introJs as unknown as () => { start: () => void };
 
@@ -40,6 +40,6 @@ export function CustomFloatButton () {
                 shape='circle'
             />
         </Popconfirm>
-        {/* <AudioButton /> */}
+        <AudioButton />
     </>;
 }
