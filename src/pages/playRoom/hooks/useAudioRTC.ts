@@ -9,7 +9,7 @@ export interface AudioInfo {
  }
 
 /** use RTC to audio communicate */
-export default function useAudioRTC (socket: Socket | void, startRecord = false, setStartRecord: (value: boolean) => void): [AudioInfo] {
+export default function useAudioRTC (socket: Socket | void, startRecord = false, setStartRecord: (value: boolean) => void): [AudioInfo | undefined] {
     const [recorder, setRecorder] = useState<RecordRTC.RecordRTCPromisesHandler>();
     const [buffer, setBuffer] = useState<AudioInfo>();
 

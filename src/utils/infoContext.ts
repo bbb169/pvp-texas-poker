@@ -8,5 +8,5 @@ export const infoContext = createContext<{
   player?: PlayerInfoType,
   otherPlayers?: PlayerInfoType[],
   victoryPlayers?: [PlayerInfoType, VictoryInfo][]
-  socket?: Socket
+  socket?: Socket | void;
 }>({});
