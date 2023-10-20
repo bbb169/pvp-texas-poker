@@ -3,18 +3,25 @@ import { message } from 'antd';
 import { useEffect, useState } from 'react';
 import RecordRTC, { RecordRTCPromisesHandler } from 'recordrtc';
 import { Socket } from 'socket.io-client';
+export interface AudioInfo { 
+    userName: string,
+    blob: ArrayBuffer,
+ }
 
 /** use RTC to audio communicate */
-export default function useAudioRTC (socket: Socket | void, startRecord = false, setStartRecord: (value: boolean) => void) {
+export default function useAudioRTC (socket: Socket | void, startRecord = false, setStartRecord: (value: boolean) => void): [AudioInfo] {
     const [recorder, setRecorder] = useState<RecordRTC.RecordRTCPromisesHandler>();
-    const [buffer, setBuffer] = useState<ArrayBuffer>();
+    const [buffer, setBuffer] = useState<AudioInfo>();
 
     useEffect(() => {
         if (!socket) {
             return;
         }
 
-        socket.on('serverSendAudioBlob', (buffer) => {
+        socket.on('serverSendAudioBlob', (buffer: { 
+            userName: string,
+            blob: ArrayBuffer,
+         }) => {
             setBuffer(buffer);
         });
 
@@ -31,6 +38,7 @@ export default function useAudioRTC (socket: Socket | void, startRecord = false,
             });
     }, [socket]);
 
+    // controll start and stop record
     useEffect(() => {
         if (!startRecord) {
             recorder?.getState().then(state => {
