@@ -1,10 +1,11 @@
 import { emitSocket } from '@/utils/api.js';
+import { message } from 'antd';
 import { useEffect, useState } from 'react';
 import RecordRTC, { RecordRTCPromisesHandler } from 'recordrtc';
 import { Socket } from 'socket.io-client';
 
 /** use RTC to audio communicate */
-export default function useAudioRTC (socket: Socket | undefined, startRecord = false) {
+export default function useAudioRTC (socket: Socket | void, startRecord = false, setStartRecord: (value: boolean) => void) {
     const [recorder, setRecorder] = useState<RecordRTC.RecordRTCPromisesHandler>();
     const [buffer, setBuffer] = useState<ArrayBuffer>();
 
@@ -24,11 +25,6 @@ export default function useAudioRTC (socket: Socket | undefined, startRecord = f
                 // emitSocket('sendStream', stream);
                 const getRecorder = new RecordRTCPromisesHandler(stream, { type: 'audio' });
                 setRecorder(getRecorder);
-
-                // max time limit is ten seconds
-                setTimeout(() => {
-                    stopAndSendRecorderBlob();
-                }, 10000);
             })
             .catch((error) => {
                 console.error('Error accessing user media:', error);
@@ -46,6 +42,15 @@ export default function useAudioRTC (socket: Socket | undefined, startRecord = f
             recorder?.getState().then(state => {
                 if (state !== 'recording') {
                     recorder.startRecording();
+                    // max time limit is ten seconds
+                    setTimeout(() => {
+                        recorder?.getState().then(state => {
+                            if (state === 'recording') {
+                                message.info('最长语音为10秒');
+                                setStartRecord(false);
+                            }
+                        });
+                    }, 10000);
                 }
             });
         }

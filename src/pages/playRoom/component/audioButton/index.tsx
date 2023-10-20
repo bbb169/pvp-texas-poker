@@ -11,7 +11,7 @@ import { isEmpty } from '@/utils/index.js';
 export default function AudioButton () {
     const [startRecord, setStartRecord] = useState(false);
     const { socket } = useContext(infoContext);
-    const [newBuffer] = useAudioRTC(socket, startRecord);
+    const [newBuffer] = useAudioRTC(socket, startRecord, setStartRecord);
     const [renderBuffer, setRenderBuffer] = useState<{ buffer: ArrayBuffer, key: number }[]>([]);
     const [blobKey, setBlobKey] = useState<number>(0);
     

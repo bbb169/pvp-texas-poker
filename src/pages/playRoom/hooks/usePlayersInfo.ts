@@ -3,7 +3,7 @@ import { Socket } from 'socket.io-client';
 import { PlayerInfoType, VictoryInfo } from '../type.js';
 
 /** set players and victory infos */
-export default function usePlayersInfo (socket: Socket | undefined): [PlayerInfoType[], PlayerInfoType | undefined, [PlayerInfoType, VictoryInfo][]] {
+export default function usePlayersInfo (socket: Socket | void): [PlayerInfoType[], PlayerInfoType | undefined, [PlayerInfoType, VictoryInfo][]] {
     const [otherPlayers, setOtherPlayers] = useState<PlayerInfoType[]>([]);
     const [myPlayer, setMyPlayer] = useState<PlayerInfoType>();
     const [victoryPlayers, setVictoryPlayers] = useState<[PlayerInfoType, VictoryInfo][]>([]);

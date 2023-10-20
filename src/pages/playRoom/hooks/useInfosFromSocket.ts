@@ -7,8 +7,8 @@ import { GptPredicateRes, PlayerInfoType, RoomInfo, VictoryInfo } from '../type.
 import usePlayersInfo from './usePlayersInfo.js';
 import useRoom from './useRoom.js';
 
-export default function useInfosFromSocket (): [PlayerInfoType[], PlayerInfoType | undefined, RoomInfo | undefined, [PlayerInfoType, VictoryInfo][], Socket | undefined] {
-    const [socket, setSocket] = useState<Socket>();
+export default function useInfosFromSocket (): [PlayerInfoType[], PlayerInfoType | undefined, RoomInfo | undefined, [PlayerInfoType, VictoryInfo][], Socket | void] {
+    const [socket, setSocket] = useState<Socket | void>();
     const [room] = useRoom(socket);
     const [otherPlayers, myPlayer, victoryPlayers] = usePlayersInfo(socket);
     const { roomId, userName } = useParams();
@@ -47,20 +47,23 @@ export default function useInfosFromSocket (): [PlayerInfoType[], PlayerInfoType
             });
 
             socket.on('disconnect', () => {
-                message.info('已与房间断开连接');
+                message.info('已与房间断开连接,可重新进入房间');
+                setSocket();
                 console.log('========== disconnected ws ===========');
             });
 
             // =================== Heartbeat Detection ====================
-            socket.on('heartbeat', (callback) => {
-                console.log('============ heartbeat ==================');
-            
-                callback();
-            });
+            setInterval(() => {
+                console.log('======== heartDetect ============ ');
+                
+                emitSocket('heartDetect');
+            }, 10000);
         }
 
         return () => {
             if (socket) {
+                console.log('dis');
+                
                 socket.disconnect();
             }
         };
