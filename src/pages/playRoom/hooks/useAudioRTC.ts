@@ -26,10 +26,9 @@ export default function useAudioRTC (socket: Socket | void, startRecord = false,
         });
 
         // Get user media
-        navigator.mediaDevices
+        navigator.mediaDevices?
             .getUserMedia({ audio: true })
             .then(async (stream) => {
-                // emitSocket('sendStream', stream);
                 const getRecorder = new RecordRTCPromisesHandler(stream, { type: 'audio' });
                 setRecorder(getRecorder);
             })
