@@ -6,6 +6,7 @@ import introJs from 'intro.js';
 import 'intro.js/introjs.css';
 import { getFloatCss } from '../../styles/playRoom.js';
 import AudioButton from '../audioButton/index.js';
+import TalkRommButton from '../talkRoomButton/index.js';
 
 const Introduct = introJs as unknown as () => { start: () => void };
 
@@ -41,5 +42,6 @@ export function CustomFloatButton () {
             />
         </Popconfirm>
         <AudioButton />
+        <TalkRommButton/>
     </>;
 }

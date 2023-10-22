@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { io, Socket } from 'socket.io-client';
 import { GptPredicateRes, PlayerInfoType, RoomInfo, VictoryInfo } from '../type.js';
+import useChatMessage from './useChatMessage.js';
 import usePlayersInfo from './usePlayersInfo.js';
 import useRoom from './useRoom.js';
 
@@ -11,6 +12,7 @@ export default function useInfosFromSocket (): [PlayerInfoType[], PlayerInfoType
     const [socket, setSocket] = useState<Socket | void>();
     const [room] = useRoom(socket);
     const [otherPlayers, myPlayer, victoryPlayers] = usePlayersInfo(socket);
+    useChatMessage(socket);
     const { roomId, userName } = useParams();
     const navigate = useNavigate();
   

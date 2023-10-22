@@ -53,3 +53,9 @@ export interface GptPredicateRes {
   publcHighestCards: CardType[];
   userHighestCards: CardType[];
 }
+
+export interface ChatMessageType { 
+  key: string | number, 
+  player: PlayerInfoType, 
+  msg: string 
+}
