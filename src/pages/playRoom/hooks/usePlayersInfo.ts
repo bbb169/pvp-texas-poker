@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import { useEffect, useState } from 'react';
 import { Socket } from 'socket.io-client';
 import { PlayerInfoType, VictoryInfo } from '../type.js';
@@ -30,6 +31,14 @@ export default function usePlayersInfo (socket: Socket | void): [PlayerInfoType[
                 console.log('victoryPlayers', victoryPlayers);
     
                 setVictoryPlayers(victoryPlayers);
+            });
+
+            socket.on('playersCalledRes', (playersCalledRes: [PlayerInfoType, string][]) => {
+                console.log('playersCalledRes', playersCalledRes);
+
+                playersCalledRes.forEach(([player, info]) => {
+                    message.success(`${player.name} ${info}`);
+                });
             });
         }
     }, [socket]);
