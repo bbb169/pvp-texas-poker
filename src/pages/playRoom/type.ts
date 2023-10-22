@@ -4,6 +4,15 @@ export type CardColor = 'diamonds' | 'hearts' | 'spades' | 'clubs';
 export type CardStatu = 'undistributed' | 'distributed' | 'determineVictory';
 export type CardShowFace = 'front' | 'back';
 
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+      interface IntrinsicElements {
+          'em-emoji': any;
+      }
+  }
+}
+
 export interface CardType {
     key: string;
     color: 'diamonds' | 'hearts' | 'spades' | 'clubs';
