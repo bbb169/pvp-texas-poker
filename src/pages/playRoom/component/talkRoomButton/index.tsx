@@ -12,7 +12,7 @@ export default function TalkRommButton () {
 
     return <>
         <Popconfirm
-            title="聊天室"
+            title="狗叫室"
             description={<ChatRoom/>}
             okText="关闭"
             showCancel={false}

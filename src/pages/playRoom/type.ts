@@ -59,3 +59,9 @@ export interface ChatMessageType {
   player: PlayerInfoType, 
   msg: string 
 }
+
+
+export interface EmojiInfo { 
+  target: string;
+  emoji: string;
+}

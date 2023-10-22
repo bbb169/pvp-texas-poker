@@ -9,6 +9,11 @@ import { SettleMoal } from './component/settleMoal/index.js';
 import { CustomFloatButton } from './component/customFloatButton/index.js';
 import { isEmpty } from '@/utils/index.js';
 import { CardType } from './type.js';
+import data from '@emoji-mart/data';
+import Picker from '@emoji-mart/react';
+import { css } from '@emotion/react';
+import React from 'react';
+const TypedPicker = Picker as unknown as (props: any) => React.JSX.Element;
 
 export function PlayRoom () {
     const [otherPlayers, player, room, victoryPlayers, socket] = useInfosFromSocket();
@@ -21,6 +26,11 @@ export function PlayRoom () {
         victoryPlayers,
         socket,
     }}>
+        {/* pre load */}
+        <div css={css`
+            position: absolute;
+            visibility: hidden;
+        `}><TypedPicker data={data}/></div>
         <div css={palyRoomPageCss}>
             <CustomFloatButton/>
             <SettleMoal/>

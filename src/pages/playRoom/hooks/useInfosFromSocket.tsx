@@ -1,9 +1,10 @@
 import { apiHost, apiPort, emitSocket, initSocket } from '@/utils/api.js';
+import { SmileOutlined } from '@ant-design/icons';
 import { message } from 'antd';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { io, Socket } from 'socket.io-client';
-import { GptPredicateRes, PlayerInfoType, RoomInfo, VictoryInfo } from '../type.js';
+import { EmojiInfo, GptPredicateRes, PlayerInfoType, RoomInfo, VictoryInfo } from '../type.js';
 import useChatMessage from './useChatMessage.js';
 import usePlayersInfo from './usePlayersInfo.js';
 import useRoom from './useRoom.js';
@@ -39,6 +40,20 @@ export default function useInfosFromSocket (): [PlayerInfoType[], PlayerInfoType
 
                 socket.on('getGptPredicate', (res: GptPredicateRes) => {
                     console.log('getGptPredicate', res);
+                });
+
+                socket.on('receiveEmoji', (msg: EmojiInfo) => {
+                    message.open({
+                        icon: <SmileOutlined />,
+                        content: userName === msg.target ? <>
+                            有人向你<em-emoji id={msg.emoji}></em-emoji>
+                        </> : <>
+                            {
+                                `${msg.target} 收到`
+                            }
+                            <em-emoji id={msg.emoji}></em-emoji>
+                        </>,
+                    });
                 });
 
                 // give room and player message to node serve
