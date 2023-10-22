@@ -1,5 +1,5 @@
 
-import { Button, Tooltip } from 'antd';
+import { Button, message, Tooltip } from 'antd';
 import { AudioMutedOutlined, AudioOutlined } from '@ant-design/icons';
 import { useContext, useEffect, useState } from 'react';
 import { getFloatCss } from '../../styles/playRoom.js';
@@ -32,9 +32,12 @@ export default function AudioButton () {
                 icon={!startRecord ? <AudioMutedOutlined /> : <AudioOutlined />}
                 type='primary'
                 danger={startRecord}
-                disabled={isEmpty(socket)}
                 shape='circle' 
                 onClick={() => {
+                    if (isEmpty(socket) || Boolean(!navigator.mediaDevices)) {
+                        message.info('当前环境下不可使用');
+                        return;
+                    }
                     setStartRecord(pre => !pre);
                 }}
                 data-intro="点击进行全房喊麦~"
