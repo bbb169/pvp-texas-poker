@@ -2,11 +2,13 @@ import { useChatMessageStore } from '@/pages/playRoom/store/chatMessage.js';
 import { customScrollBar } from '@/styles/scrollbar.js';
 import { emitSocket } from '@/utils/api.js';
 import { infoContext } from '@/utils/infoContext.js';
-import { SendOutlined } from '@ant-design/icons';
+import { SendOutlined, SmileOutlined } from '@ant-design/icons';
 import { css } from '@emotion/react';
-import { Button, Input, Tooltip } from 'antd';
+import { Button, Input, Popconfirm, Tooltip } from 'antd';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import PlayerAvatar from '../playerAvatar/index.js';
+import data from '@emoji-mart/data';
+import Picker from '@emoji-mart/react';
 
 const chatContainerStyle = css`
   width: 50vw;
@@ -47,7 +49,7 @@ const chatBubbleStyle = (isUser = false) => css`
 
 export default function ChatRoom (): React.JSX.Element {
     const listRef = useRef<HTMLDivElement>(null);
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState<string>('');
     const { chatMessage: { info: messages } } = useChatMessageStore();
     const { player } = useContext(infoContext);
 
@@ -56,7 +58,7 @@ export default function ChatRoom (): React.JSX.Element {
     }, [messages]);
 
     const handleSendMessage = () => {
-        if (message.trim() === '') return;
+        if (message?.toString().trim() === '') return;
         emitSocket('sendMessage', { player, msg: message });
         setMessage('');
     };
@@ -73,8 +75,9 @@ export default function ChatRoom (): React.JSX.Element {
 
                         return <div css={chatBubbleBoxStyle(isMe)} key={key}>
                             {!isMe && <Tooltip title={curPlayer.name}><PlayerAvatar player={curPlayer}/></Tooltip>}
-                            <span css={chatBubbleStyle(isMe)}>
-                                {msg}
+                            <span 
+                                css={chatBubbleStyle(isMe)}
+                                dangerouslySetInnerHTML={{ __html: msg.replace(/<[^>]+>(.*?)<\/[^>]+>/g, '').replace(/\[([a-zA-Z0-9_\-]+)\]/g, '<em-emoji id="$1"></em-emoji>') }}>
                             </span>
                             {isMe && <Tooltip title={curPlayer.name}><PlayerAvatar player={curPlayer}/></Tooltip>}
                         </div>;  
@@ -83,13 +86,45 @@ export default function ChatRoom (): React.JSX.Element {
             </div>
             <Input
                 css={css`
-                    width: 100%
+                    width: 100%;
+                    position: relative;
                 `}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onPressEnter={handleSendMessage}
                 suffix={
-                    <Button type="primary" shape='circle' onClick={handleSendMessage} icon={<SendOutlined />} />
+                    <>
+                        <Popconfirm
+                            title='表情包'
+                            icon={<></>}
+                            description={
+                                <div
+                                    css={css`
+                                        > div > em-emoji-picker {
+                                            max-height: 200px;
+                                        }
+                                    `}>
+                                    <Picker 
+                                        className='asda'
+                                        locale='zh'
+                                        categories='people' 
+                                        data={data} onEmojiSelect={(icon: any) => {
+                                            setMessage(`${message}[${icon.id}]`);
+                                        }} 
+                                        previewPosition='none'
+                                        perLine={5}
+                                        searchPosition='none'
+                                    />
+                                </div>    
+                            }
+                            placement='bottomRight'
+                            showCancel={false}
+                        >
+                            <Button type='primary' shape='circle' icon={
+                                <SmileOutlined/>} />
+                        </Popconfirm>
+                        <Button type="primary" shape='circle' onClick={handleSendMessage} icon={<SendOutlined />} />
+                    </>
                 }
             />
         </div>
