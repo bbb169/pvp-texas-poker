@@ -33,8 +33,7 @@ export function PlayRoom () {
                 </div>}
                 {!isEmpty(room?.publicCards) && <DemoCards data-intro="公共牌堆，随着轮次依次展示，所有牌均可拖动，但是有些不会改变牌的顺序" cards={room?.publicCards as CardType[]} />}
                 {/* starting game or waiting */}
-                {room && room.statu !== 'started'                 && 
-                <WaitingStart isButtonPosition={isButtonPosition} hasOtherPlayers= {otherPlayers.length}/>}
+                {room && <WaitingStart isButtonPosition={isButtonPosition} hasOtherPlayers= {otherPlayers.length} room={room}/>}
             </div>
             {/* foot place for myPlayer to show its own cards */}
             <FootHolder key='footHolder'/>
