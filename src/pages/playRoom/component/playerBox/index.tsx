@@ -29,6 +29,7 @@ export default function PlayerBox ({ player } : { player: PlayerInfoType }) {
             <div>已下注: {player.calledChips}</div>
             <div>已负债: {player.debt}</div>
             {isBarking && <div>正在狗叫...</div>}
+            {<div>点击表情可互动</div>}
         </div>
         <div css={css`
             display: flex;
