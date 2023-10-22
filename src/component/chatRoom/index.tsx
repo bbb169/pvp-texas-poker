@@ -9,6 +9,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import PlayerAvatar from '../playerAvatar/index.js';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
+const TypedPicker = Picker as unknown as (props: any) => React.JSX.Element;
 
 const chatContainerStyle = css`
   width: 50vw;
@@ -104,7 +105,7 @@ export default function ChatRoom (): React.JSX.Element {
                                             max-height: 200px;
                                         }
                                     `}>
-                                    <Picker 
+                                    <TypedPicker 
                                         className='asda'
                                         locale='zh'
                                         categories='people' 
