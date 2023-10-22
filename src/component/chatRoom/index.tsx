@@ -106,7 +106,6 @@ export default function ChatRoom (): React.JSX.Element {
                                         }
                                     `}>
                                     <TypedPicker 
-                                        className='asda'
                                         locale='zh'
                                         categories='people' 
                                         data={data} onEmojiSelect={(icon: any) => {
