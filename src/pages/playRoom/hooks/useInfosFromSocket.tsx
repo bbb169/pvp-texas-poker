@@ -34,26 +34,26 @@ export default function useInfosFromSocket (): [PlayerInfoType[], PlayerInfoType
                 });
 
                 // if repeat username, need use another username
-                socket.on('updateUserName', (userName: string) => {
-                    navigate(`/playRoom/${roomId}/${userName}`);
+                socket.on('updateUserName', (newUserName: string) => {
+                    navigate(`/playRoom/${roomId}/${newUserName}`);
+
+                    socket.on('receiveEmoji', (msg: EmojiInfo) => {
+                        message.open({
+                            icon: <SmileOutlined />,
+                            content: newUserName === msg.target ? <>
+                            有人向你<em-emoji id={msg.emoji}></em-emoji>
+                            </> : <>
+                                {
+                                    `${msg.target} 收到`
+                                }
+                                <em-emoji id={msg.emoji}></em-emoji>
+                            </>,
+                        });
+                    });
                 });
 
                 socket.on('getGptPredicate', (res: GptPredicateRes) => {
                     console.log('getGptPredicate', res);
-                });
-
-                socket.on('receiveEmoji', (msg: EmojiInfo) => {
-                    message.open({
-                        icon: <SmileOutlined />,
-                        content: userName === msg.target ? <>
-                            有人向你<em-emoji id={msg.emoji}></em-emoji>
-                        </> : <>
-                            {
-                                `${msg.target} 收到`
-                            }
-                            <em-emoji id={msg.emoji}></em-emoji>
-                        </>,
-                    });
                 });
 
                 // give room and player message to node serve
