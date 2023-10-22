@@ -25,7 +25,9 @@ export function SettleMoal () {
             `}>
                 <h2>获胜玩家</h2>
                 {
-                    victoryPlayers?.map(([player, victoryInfo]) => <div key={player.name}>
+                    victoryPlayers?.map(([player, victoryInfo]) => <div key={player.name} css={css`
+                        margin-bottom: 8px;
+                    `}>
                         <Popconfirm  title={
                             <div css={css`
                             width: 80vw;
