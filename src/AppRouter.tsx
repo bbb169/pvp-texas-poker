@@ -8,7 +8,7 @@ const AppRouter = () => {
         <Routes>
             <Route path="/" Component={Login} />
             <Route path="/playRoom/:roomId/:userName" Component={PlayRoom} />
-            <Route Component={Login} />
+            <Route path="*" Component={Login} />
         </Routes>
     </Router>;
 };
